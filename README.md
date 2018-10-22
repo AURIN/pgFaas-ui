@@ -23,12 +23,12 @@ yarn install <br>
 
 #### Run local server
 
-yarn run build-dev
+yarn run build-dev <br>
 yarn run start
 
 #### Build production
 
-yarn run build
+yarn run build <br>
 yarn run start
 
 #### Configuration
