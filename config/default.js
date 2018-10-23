@@ -3,6 +3,8 @@ module.exports = {
     PORT: 8071,
     BIND_ADDRESS: "localhost"
   },
-  URL_BASE: 'http://localhost:8071',
+  PGFAAS: {
+    URL_BASE: 'http://localhost:3010'
+  }
 };
 

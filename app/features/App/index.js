@@ -6,6 +6,7 @@ import { Pane, Text, Button } from 'evergreen-ui';
 import './styles/app.css';
 import CodeInput from '../CodeInput';
 import TopBar from '../TopBar';
+import ParametersPanel from '../ParametersPanel';
 
 class App extends React.Component {
   constructor (props) {
@@ -35,15 +36,7 @@ class App extends React.Component {
           justifyContent="flex-start"
           border="default"
         >
-          <Pane
-            width="15%"
-            display="flex"
-            alignItems="center"
-            justifyContent="center"
-            border="none"
-          >
-            <Text>Pane</Text>
-          </Pane>
+          <ParametersPanel />
           <Pane
             width="0.5%"
             height="100%"

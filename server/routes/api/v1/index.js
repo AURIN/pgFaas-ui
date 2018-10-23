@@ -2,9 +2,9 @@
  * Add private application routes.
  * @param {Object} app Express application
  */
-const test = require('../../../controllers/api/test.js');
+const Namespaces = require('../../../controllers/api/namespaces.js');
 
 module.exports = function (app) {
-  'use strict';
-  app.get('/api/v1/test', test)
+  app.get('/api/v1/namespaces', Namespaces.getNamespaces)
+  app.get('/api/v1/namespaces/:namespace', Namespaces.getNamespace)
 };

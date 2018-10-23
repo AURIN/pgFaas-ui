@@ -23,10 +23,10 @@ yarn install <br>
 
 #### Run local server
 
-yarn run build-dev <br>
-yarn run start
+Watch the src files: ````yarn run build-dev```` <br>
+Start the server:    ````yarn run start````
 
-#### Build production
+#### Build production and run server
 
 yarn run build <br>
 yarn run start
