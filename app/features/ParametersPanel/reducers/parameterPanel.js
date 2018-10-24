@@ -3,8 +3,9 @@ import * as _ from 'lodash';
 
 const initialData = {
   initialised: false,
+  cursor: null,
   data: {
-    name: 'root',
+    name: 'NameSpaces',
     toggled: true,
     children: []
   }
@@ -14,6 +15,34 @@ export default (state = initialData, action) => {
   switch (action.type) {
     case types.PARAMETER_PANEL_INIT:
       return state;
+    case types.TOGGLE_CODE_TREE:
+      const { node, toggled } = action;
+      if (node.ignore) {
+        return state;
+      }
+
+      const newData = _.cloneDeep(state.data);
+      const cursor = _.cloneDeep(state.cursor);
+
+      if (cursor) {
+        _.get(newData, cursor.path).active = false;
+      }
+
+      const clonedNode = _.get(newData, node.path);
+      clonedNode.active = true;
+      if (clonedNode.children) {
+        clonedNode.toggled = toggled;
+      }
+
+      return _.merge(
+        {},
+        state,
+        {
+          cursor: clonedNode,
+          data: newData
+        }
+      );
+
     case types.SAGA_SET_PARAMETER_PANEL_CHILDREN:
       return _.merge(
         {},

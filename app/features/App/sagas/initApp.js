@@ -11,7 +11,6 @@ import { LAYOUT_DIMENSIONS } from '../../../config.js';
  */
 const initApp = function* _initApp () {
   const action = yield take(types.SET_APP_DIMENSIONS);
-  console.warn(action);
 };
 
 module.exports = {

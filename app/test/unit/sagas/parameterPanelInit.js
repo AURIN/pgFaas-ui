@@ -24,8 +24,8 @@ test('parameterPanelInit', () => {
     .put({
       type: types.SAGA_SET_PARAMETER_PANEL_CHILDREN,
       data: [
-        {name: 'space1', children: [{name: 'f1'}, {name: 'f2'}]},
-        {name: 'space2', children: [{name: 'f1'}, {name: 'f2'}]}
+        {name: 'space1', children: [{name: 'f1', nSpaceParent: 'space1'}, {name: 'f2', nSpaceParent: 'space1'}]},
+        {name: 'space2', children: [{name: 'f1', nSpaceParent: 'space2'}, {name: 'f2', nSpaceParent: 'space2'}]}
       ]
     })
     .run();

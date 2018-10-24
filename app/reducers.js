@@ -1,12 +1,12 @@
 import { routerReducer as routing } from 'react-router-redux';
 import { combineReducers } from 'redux';
-import codeInput from  './features/CodeInput/reducers/codeInput.js';
 import parameterPanel  from  './features/ParametersPanel/reducers/parameterPanel.js';
+import codePanel from  './features/CodePanel/reducers/codePanel.js';
 
 const rootReducer = combineReducers({
   routing,
-  codeInput,
-  parameterPanel
+  parameterPanel,
+  codePanel
 });
 
 export default rootReducer;

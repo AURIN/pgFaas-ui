@@ -2,11 +2,11 @@ import React from 'react';
 import {connect} from 'react-redux';
 import PropTypes from 'prop-types';
 import { setAppDimensions } from './actions/index.js';
-import { Pane, Text, Button } from 'evergreen-ui';
+import { Pane, Text} from 'evergreen-ui';
 import './styles/app.css';
-import CodeInput from '../CodeInput';
 import TopBar from '../TopBar';
 import ParametersPanel from '../ParametersPanel';
+import CodePanel from '../CodePanel';
 
 class App extends React.Component {
   constructor (props) {
@@ -46,34 +46,7 @@ class App extends React.Component {
             justifyContent="flex-start"
             background="tint2"
             border="none" />
-          <Pane
-            width="42%"
-            height="100%"
-            display="flex"
-            paddingLeft="20px"
-            alignItems="center"
-            flexDirection="column"
-            justifyContent="flex-start"
-            border="none">
-            <Pane
-              width="100%"
-              display="flex"
-              alignItems="center"
-              margin="2px"
-              justifyContent="flex-end"
-              border="none">
-              <Button
-                marginRight={5}
-                height={32}
-                appearance="default"
-                intent="success"
-                iconAfter="caret-right">
-                Run
-              </Button>
-
-            </Pane>
-            <CodeInput />
-          </Pane>
+          <CodePanel />
           <Pane
             width="0.5%"
             height="100%"

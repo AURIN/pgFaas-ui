@@ -1,0 +1,15 @@
+.function-text:hover {
+  color: #47B881;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.parameter-panel-tab:hover {
+  background: #F9F9FB;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.parameter-panel-tab-clicked {
+  color: #47B881;
+}

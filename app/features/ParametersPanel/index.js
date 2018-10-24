@@ -8,9 +8,6 @@ import { parameterPanelInit } from './actions/index.js';
 class ParametersPanel extends React.Component {
   constructor (props) {
     super(props);
-    this.state = {
-      value: 'name_spaces'
-    };
   }
 
   componentDidMount () {
@@ -39,18 +36,24 @@ class ParametersPanel extends React.Component {
           justifyContent="flex-start"
           border="none">
           <Pane
+            className="parameter-panel-tab"
             width="50%"
+            height="32px"
             display="flex"
             flexDirection="column"
             alignItems="center"
+            background="#E4E7EB"
             alignContent="center"
             justifyContent="center"
             border="none">
             <Text> NameSpaces </Text>
           </Pane>
           <Pane
+            className="parameter-panel-tab"
             width="50%"
             display="flex"
+            height="32px"
+            background="#E4E7EB"
             flexDirection="column"
             alignItems="center"
             alignContent="center"
@@ -59,7 +62,7 @@ class ParametersPanel extends React.Component {
             <Text> Databases </Text>
           </Pane>
         </Pane>
-        <FolderTree structure={this.props.parameterPanel.data} />
+        <FolderTree />
       </Pane>
     );
   }
@@ -67,7 +70,7 @@ class ParametersPanel extends React.Component {
 
 const mapDispatchToProps = dispatch => {
   return {
-    parameterPanelInit: () => dispatch(parameterPanelInit())
+    parameterPanelInit: () => dispatch(parameterPanelInit()),
   };
 };
 
@@ -78,7 +81,7 @@ const mapStateToProps = state => {
 
 ParametersPanel.propTypes = {
   parameterPanel: PropTypes.object,
-  parameterPanelInit: PropTypes.func
+  parameterPanelInit: PropTypes.func,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(ParametersPanel);

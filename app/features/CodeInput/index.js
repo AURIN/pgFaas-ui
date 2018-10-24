@@ -2,7 +2,8 @@ import React from 'react';
 import {connect} from 'react-redux';
 import PropTypes from 'prop-types';
 import { Pane } from 'evergreen-ui';
-import CodeMirror from 'react-codemirror';
+import {Controlled as CodeMirror} from 'react-codemirror2';
+import { updateCode } from '../CodePanel/actions/index.js';
 import 'codemirror/lib/codemirror.css';
 import 'codemirror/mode/javascript/javascript';
 import './styles/styles.css';
@@ -26,13 +27,17 @@ class CodeInput extends React.Component {
         display="flex"
         alignItems="flex-start"
         margin="2px"
+        paddingLeft="5px"
         justifyContent="flex-start"
         border="none">
         <CodeMirror
           className="code-mir-react"
-          value={this.props.codeInput.code}
+          value={this.props.code}
           mode="javascript"
           autoFocus={true}
+          onBeforeChange={(editor, data, value) => {
+            this.props.updateCode(value);
+          }}
           options={{
             lineNumbers: true,
             tabSize: 2,
@@ -42,20 +47,16 @@ class CodeInput extends React.Component {
   }
 }
 
-// const mapDispatchToProps = dispatch => {
-//   return {
-//     setAppDimensions: () => dispatch({})
-//   };
-// };
-
-const mapStateToProps = state => {
-  const { codeInput } = state;
-  return { codeInput };
+const mapDispatchToProps = dispatch => {
+  return {
+    updateCode: code => dispatch(updateCode(code))
+  };
 };
 
 CodeInput.propTypes = {
   setAppDimensions: PropTypes.func,
-  codeInput: PropTypes.object
+  code: PropTypes.string,
+  updateCode: PropTypes.func
 };
 
-export default connect(mapStateToProps, null)(CodeInput);
+export default connect(null, mapDispatchToProps)(CodeInput);

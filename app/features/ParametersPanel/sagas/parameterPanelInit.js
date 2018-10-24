@@ -7,9 +7,7 @@ import {
 
 const buildNameSpaces = () => {
   return getNameSpaces()
-    .then(nameSpaces => Promise.all(
-      nameSpaces.map(ns => getNameSpace(ns))
-    ));
+    .then(nameSpaces => Promise.all(nameSpaces.map(ns => getNameSpace(ns))));
 };
 
 const parameterPanelInit = function* _parameterPanelInit () {
@@ -17,14 +15,15 @@ const parameterPanelInit = function* _parameterPanelInit () {
   const nameSpaces = yield call(buildNameSpaces);
 
   // Build tree structure
-  const newTreeChildren = nameSpaces.map(ns => {
-    return {
-      name: ns.nameSpace,
-      children: ns.functions.map(f => {
-        return { name: f };
-      })
-    };
-  });
+  const newTreeChildren = nameSpaces.map((ns, inx) => ({
+    name: ns.nameSpace,
+    path: `children[${inx}]`,
+    children: ns.functions.map((f, inx2) => ({
+      name: f,
+      path: `children[${inx}].children[${inx2}]`,
+      nSpaceParent: ns.nameSpace})
+    )
+  }));
 
   yield put({
     type: types.SAGA_SET_PARAMETER_PANEL_CHILDREN,

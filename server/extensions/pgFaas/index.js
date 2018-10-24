@@ -3,5 +3,6 @@ const BASE_URL = config.get('PGFAAS.URL_BASE')
 
 module.exports = {
   NAMESPACES: () => BASE_URL + '/',
-  NAMESPACE: (name) => BASE_URL + `/${name}`
+  NAMESPACE: (nSpace) => BASE_URL + `/${nSpace}`,
+  FUNCTION: (nSpace, fName) => BASE_URL + `/${nSpace}/${fName}`
 };
