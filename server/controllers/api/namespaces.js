@@ -9,10 +9,10 @@ const API = require('../../extensions/pgFaas/index.js');
 function getNamespaces (req, res) {
   axios.get(API.NAMESPACES())
     .then(function (response) {
-      res.status(200).send(response.data);
+      res.status(200).json(response.data);
     })
     .catch(function (error) {
-      res.status(500).send({msg: error});
+      res.status(500).json({msg: error.message});
     })
 }
 
@@ -24,19 +24,19 @@ function getNamespaces (req, res) {
 function getNamespace (req, res) {
   axios.get(API.NAMESPACE(req.params.namespace))
     .then(function (response) {
-      res.status(200).send(response.data);
+      res.status(200).json(response.data);
     })
     .catch(function (error) {
-      res.status(500).send({msg: error});
+      res.status(500).json({msg: error.message});
     })
 }
 
 function createNameSpaces (req, res) {
   if (!req.body) {
-    res.status(400).send({msg: 'Missing body in payload.'});
+    res.status(400).json({msg: 'Missing body in payload.'});
   } else if (!req.body.name) {
     console.warn(req.body, req.params, req.data);
-    res.status(400).send({msg: 'Payload must have a name key'});
+    res.status(400).json({msg: 'Payload must have a name key'});
   } else {
     axios.post(
         API.NAMESPACES(),

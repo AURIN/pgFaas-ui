@@ -38,13 +38,21 @@ class FolderTree extends React.Component {
       {},
       structure,
       {
+        ignore: true,
         decorators: {
           Header: props => (
             <Text
               fontWeight="bold"
               style={props.style}>
               {props.node.name}
-            </Text>)
+            </Text>),
+          Toggle: props => {
+            return (
+              <Pane
+                display="inline-block"
+                style={props.style} />
+            );
+          }
         },
         children: structure.children.map(struct => Object.assign(
           struct,
@@ -99,6 +107,7 @@ class FolderTree extends React.Component {
                   }
                   <NewNameSpacePopover>
                     <Text
+                      className="create-text"
                       style={props.style}
                       marginLeft="8px"
                       cursor="pointer">

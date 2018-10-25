@@ -10,15 +10,22 @@ const getNameSpaces = () => {
       method: 'get',
       cache: 'no-cache'
     })
-    .then(res => res.json());
+    .then(res => {
+      if (res.ok) return res.json();
+      throw Error(res.statusText);
+    })
+    .catch(err => { throw Error(err); });
 };
 
 /**
- * Get the funciton in namespace
+ * Get the functions in namespace
  */
 const getNameSpace = (nameSpace) =>
   fetch(API.NAMESPACE(nameSpace), { method: 'get', cache: 'no-cache' })
-    .then(res => res.json())
+    .then(res => {
+      if (res.ok) return res.json();
+      throw Error(res.statusText);
+    })
     .then(res => { return {nameSpace: nameSpace, functions: res}; });
 
 /**
@@ -34,7 +41,10 @@ const createNameSpace = nameSpace =>
       headers: { 'Content-Type': 'application/json; charset=utf-8' },
       body: JSON.stringify({'name': nameSpace})
     })
-    .then(res => res.json())
+    .then(res => {
+      if (res.ok) return res.json();
+      return ({ error: res.statusText});
+    })
     .then(response => ({ response }))
     .catch(error => ({ error }));
 

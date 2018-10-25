@@ -17,7 +17,7 @@ const createNewNameSpace = function* _createNewNameSpace () {
     if (response) {
       toaster.success('Namespace created', { duration: 2 });
     } else {
-      toaster.error('Namespace could not be saved');
+      toaster.danger('Namespace could not be saved');
       console.warn(error);
     }
 

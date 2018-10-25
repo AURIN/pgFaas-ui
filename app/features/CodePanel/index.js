@@ -1,7 +1,7 @@
 import React from 'react';
 import {connect} from 'react-redux';
 import PropTypes from 'prop-types';
-import { TextInput, Pane, Button } from 'evergreen-ui';
+import { Text, TextInput, Pane, Button } from 'evergreen-ui';
 import CodeInput from '../CodeInput';
 import TestInput from '../TestInput';
 import {
@@ -56,11 +56,14 @@ class CodePanel extends React.Component {
   }
 
   render () {
-    const { nodeVariant } = this.props.codePanel;
+    const { nodeVariant, fName, nSpace } = this.props.codePanel;
     const buttonsRender = () => {
       switch(nodeVariant) {
         case NODE_TYPES.FUNCTION:
-          return (
+          return ([
+            <div>
+              <Text paddingLeft="30px"> Function : {`${nSpace} / ${fName}`} </Text>
+            </div>,
             <div>
               <Button
                 marginRight={5}
@@ -69,7 +72,7 @@ class CodePanel extends React.Component {
                 intent="success"
                 onClick={this.onUpdateClick}
                 iconAfter="upload">
-                Upload
+                Update
               </Button>
               <Button
                 marginRight={5}
@@ -88,10 +91,12 @@ class CodePanel extends React.Component {
                 Run
               </Button>
             </div>
-          );
+          ]);
         case NODE_TYPES.NAMESPACE:
-          return (
+          return ([
+            <div/>,
             <div>
+              <Text> Create a new function : </Text>
               <TextInput
                 width="170px"
                 isInvalid={!this.state.isValid}
@@ -109,20 +114,12 @@ class CodePanel extends React.Component {
                 iconAfter="saved">
                 Create
               </Button>
-              <Button
-                marginRight={5}
-                height={32}
-                appearance="default"
-                intent="success"
-                iconAfter="caret-right">
-                Run
-              </Button>
             </div>
-          );
+          ]);
         default:
-          return (
+          return ([
             <div />
-          );
+          ]);
       }
     };
     return (
@@ -136,14 +133,15 @@ class CodePanel extends React.Component {
         border="none">
         <Pane
           width="100%"
-          minHeight="32px"
+          height="32px"
           display="flex"
           alignItems="center"
           marginBottom="2px"
+          borderBottom="1px solid #C7CED4"
           background="#E4E7EB"
-          justifyContent="flex-end"
+          justifyContent="space-between"
           border="none">
-          { buttonsRender() }
+          { buttonsRender().map((e, inx) => (<div key={inx}> {e}</div>)) }
         </Pane>
         <CodeInput code={this.props.codePanel.code} />
         <Pane
@@ -152,6 +150,8 @@ class CodePanel extends React.Component {
           display="flex"
           alignItems="center"
           marginTop="2px"
+          borderTop="1px solid #C7CED4"
+          borderBottom="1px solid #C7CED4"
           marginBottom="2px"
           background="#E4E7EB"
           justifyContent="flex-end"

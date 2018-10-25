@@ -30,40 +30,41 @@ class App extends React.Component {
         <TopBar/>
         <Pane
           height="800px"
-          margin="50px"
+          margin="25px"
           display="flex"
           alignItems="center"
           justifyContent="flex-start"
           border="default"
         >
           <ParametersPanel />
-          <Pane
-            width="0.5%"
-            height="100%"
-            display="flex"
-            alignItems="center"
-            flexDirection="column"
-            justifyContent="flex-start"
-            background="tint2"
-            border="none" />
+          <Pane className="divider" >
+            <Pane className="topDivider" />
+            <Pane className="bottomDivider" />
+          </Pane>
           <CodePanel />
-          <Pane
-            width="0.5%"
-            height="100%"
-            display="flex"
-            alignItems="center"
-            flexDirection="column"
-            justifyContent="flex-start"
-            background="tint2"
-            border="none" />
+          <Pane className="divider" >
+            <Pane className="topDivider" />
+            <Pane className="bottomDivider" />
+          </Pane>
           <Pane
             width="42%"
+            height="100%"
             display="flex"
-            paddingLeft="20px"
-            alignItems="center"
+            alignItems="flex-start"
             flexDirection="column"
             justifyContent="flex-start"
             border="none">
+            <Pane
+              background="#E4E7EB"
+              height="32px"
+              width="100%"
+              display="flex"
+              borderBottom="1px solid #C7CED4"
+              flexDirection="row"
+              alignItems="flex-start"
+              alignContent="flex-start"
+              justifyContent="flex-start"
+              border="none" />
             <Text>Pane</Text>
           </Pane>
         </Pane>

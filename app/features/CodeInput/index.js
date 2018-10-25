@@ -17,13 +17,11 @@ class CodeInput extends React.Component {
     return(
       <Pane
         width="100%"
-        height="40%"
+        height="50%"
         overflow="hide"
         display="flex"
         alignItems="flex-start"
-        margin="2px"
-        marginRight="20px"
-        paddingLeft="5px"
+        marginTop="2px"
         justifyContent="flex-start"
         border="none">
         <CodeMirror

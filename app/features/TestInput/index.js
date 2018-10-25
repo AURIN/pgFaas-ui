@@ -25,10 +25,8 @@ class TestInput extends React.Component {
         height="40%"
         display="flex"
         alignItems="flex-start"
-        margin="2px"
-        marginRight="20px"
-        paddingLeft="5px"
         justifyContent="flex-start"
+        marginTop="2px"
         border="none">
         <CodeMirror
           className="code-mir-react"

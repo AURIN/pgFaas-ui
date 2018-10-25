@@ -27,9 +27,10 @@ class ParametersPanel extends React.Component {
         border="none"
       >
         <Pane
-          height="5%"
+          height="32px"
           width="100%"
           display="flex"
+          borderBottom="1px solid #C7CED4"
           flexDirection="row"
           alignItems="flex-start"
           alignContent="flex-start"
@@ -41,6 +42,7 @@ class ParametersPanel extends React.Component {
             height="32px"
             display="flex"
             flexDirection="column"
+            borderBottom="1px solid #C7CED4"
             alignItems="center"
             background="#E4E7EB"
             alignContent="center"
@@ -54,6 +56,7 @@ class ParametersPanel extends React.Component {
             display="flex"
             height="32px"
             background="#E4E7EB"
+            borderBottom="1px solid #C7CED4"
             flexDirection="column"
             alignItems="center"
             alignContent="center"
@@ -62,7 +65,11 @@ class ParametersPanel extends React.Component {
             <Text> Databases </Text>
           </Pane>
         </Pane>
-        <FolderTree />
+        <Pane
+          paddingLeft="10px"
+          paddingTop="15px" >
+          <FolderTree />
+        </Pane>
       </Pane>
     );
   }

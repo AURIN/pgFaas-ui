@@ -15,12 +15,19 @@ class NewNameSpacePopover extends React.Component {
     this.newValue = '';
     this.onChange = this.onChange.bind(this);
     this.onKeyDown = this.onKeyDown.bind(this);
+    this.createNameSpace = this.createNameSpace.bind(this);
   }
 
   onKeyDown (e) {
     if (e.key === 'Enter') {
       e.preventDefault();
       e.stopPropagation();
+      this.createNameSpace();
+    }
+  }
+
+  createNameSpace () {
+    if (this.newValue.length > 0) {
       this.props.createNewNameSpace(this.newValue);
     }
   }
@@ -43,8 +50,12 @@ class NewNameSpacePopover extends React.Component {
         case NAMESPACE_STATES.VALID:
           return (
             <Icon
-              icon="small-tick"
-              onClick={this.createNewNameSpace}
+              title="Create"
+              marginLeft="5px"
+              cursor="pointer"
+              icon="saved"
+              color="success"
+              onClick={this.createNameSpace}
             />
           );
         default:

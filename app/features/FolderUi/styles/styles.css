@@ -13,3 +13,8 @@
 .parameter-panel-tab-clicked {
   color: #47B881;
 }
+
+.create-text:hover {
+  color: #47B881;
+  font-weight: bold;
+}
