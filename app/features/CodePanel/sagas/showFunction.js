@@ -10,7 +10,8 @@ const showFunction = function* _showFunction () {
       type: types.SAGA_SHOW_FUNCTION_SET_CODE_PANEL,
       nSpace: fDet.nSpace,
       fName: fDet.fName,
-      code: fDet.code
+      code: fDet.code,
+      testInput: fDet.testInput
     });
   }
 };

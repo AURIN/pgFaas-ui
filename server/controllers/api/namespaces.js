@@ -31,7 +31,28 @@ function getNamespace (req, res) {
     })
 }
 
+function createNameSpaces (req, res) {
+  if (!req.body) {
+    res.status(400).send({msg: 'Missing body in payload.'});
+  } else if (!req.body.name) {
+    console.warn(req.body, req.params, req.data);
+    res.status(400).send({msg: 'Payload must have a name key'});
+  } else {
+    axios.post(
+        API.NAMESPACES(),
+        req.body
+      )
+      .then(function (response) {
+        res.status(200).json(response.data)
+      })
+      .catch(function (error) {
+        res.status(500).json(error.message);
+      })
+  }
+}
+
 module.exports = {
   getNamespaces: getNamespaces,
-  getNamespace: getNamespace
+  getNamespace: getNamespace,
+  createNameSpaces: createNameSpaces
 }

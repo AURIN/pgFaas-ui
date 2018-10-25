@@ -4,6 +4,10 @@ import * as _ from 'lodash';
 const initialData = {
   initialised: false,
   cursor: null,
+  newNameSpaceDialog: {
+    state: 'INVALID',
+    value: ''
+  },
   data: {
     name: 'NameSpaces',
     toggled: true,
@@ -50,6 +54,26 @@ export default (state = initialData, action) => {
         {
           data: {
             children: action.data
+          }
+        }
+      );
+    case types.SET_NAME_SPACE_STATE:
+      return _.merge(
+        {},
+        _.cloneDeep(state),
+        {
+          newNameSpaceDialog: {
+            state: action.state
+          }
+        }
+      );
+    case types.SET_NEW_NAME_SPACE_VALUE:
+      return _.merge(
+        {},
+        _.cloneDeep(state),
+        {
+          newNameSpaceDialog: {
+            value: action.value
           }
         }
       );

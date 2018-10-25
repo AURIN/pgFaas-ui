@@ -5,28 +5,24 @@ import { Pane } from 'evergreen-ui';
 import {Controlled as CodeMirror} from 'react-codemirror2';
 import { updateCode } from '../CodePanel/actions/index.js';
 import 'codemirror/lib/codemirror.css';
-import 'codemirror/mode/javascript/javascript';
 import './styles/styles.css';
+import 'codemirror/mode/javascript/javascript';
 
 class CodeInput extends React.Component {
   constructor (props) {
     super(props);
   }
 
-  componentDidMount () {
-  }
-
-  componentWillReceiveProps (nextProps) {
-    nextProps;
-  }
-
   render () {
     return(
       <Pane
         width="100%"
+        height="40%"
+        overflow="hide"
         display="flex"
         alignItems="flex-start"
         margin="2px"
+        marginRight="20px"
         paddingLeft="5px"
         justifyContent="flex-start"
         border="none">
@@ -40,6 +36,7 @@ class CodeInput extends React.Component {
           }}
           options={{
             lineNumbers: true,
+            lineWrapping: true,
             tabSize: 2,
           }} />
       </Pane>
@@ -47,11 +44,9 @@ class CodeInput extends React.Component {
   }
 }
 
-const mapDispatchToProps = dispatch => {
-  return {
-    updateCode: code => dispatch(updateCode(code))
-  };
-};
+const mapDispatchToProps = dispatch => ({
+  updateCode: code => dispatch(updateCode(code))
+});
 
 CodeInput.propTypes = {
   setAppDimensions: PropTypes.func,

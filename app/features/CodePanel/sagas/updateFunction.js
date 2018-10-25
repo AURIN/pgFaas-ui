@@ -1,4 +1,4 @@
-import { call, take  } from 'redux-saga/effects';
+import { call, take } from 'redux-saga/effects';
 import * as types from '../actions/types.js';
 import { updateFunction as apiUpdateFunction } from '../../../lib/api/functions.js';
 import { toaster } from 'evergreen-ui';

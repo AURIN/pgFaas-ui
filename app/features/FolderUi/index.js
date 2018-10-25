@@ -2,17 +2,30 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import {connect} from 'react-redux';
 import {Treebeard} from 'react-treebeard';
-import { Pane, Text, Icon } from 'evergreen-ui';
+import { Spinner, Pane, Text, Icon } from 'evergreen-ui';
 import treeStyles from './styles/tree.js';
 import { showFunctionRequest } from '../CodePanel/actions/index.js';
 import { toggleCodeNode } from '../ParametersPanel/actions/index.js';
 import * as _ from 'lodash';
 import './styles/styles.css';
+import NewNameSpacePopover from './components/NewNameSpace/index.js';
+import { NAMESPACE_STATES, NODE_TYPES } from '../ParametersPanel/actions/types.js';
 
 class FolderTree extends React.Component {
   constructor (props) {
     super(props);
     this.state = {};
+    this.onToggleNode = this.onToggleNode.bind(this);
+  }
+
+  onToggleNode (node, toggle) {
+    if (!node.ignore) {
+      this.props.toggleCodeNode(
+        node,
+        toggle,
+        node.variant
+      );
+    }
   }
 
   /**
@@ -20,6 +33,7 @@ class FolderTree extends React.Component {
    */
   hydratedTreeStructure () {
     const structure = _.cloneDeep(this.props.parameterPanel.data);
+    const dialogState = this.props.parameterPanel.newNameSpaceDialog.state;
     return Object.assign(
       {},
       structure,
@@ -35,32 +49,31 @@ class FolderTree extends React.Component {
         children: structure.children.map(struct => Object.assign(
           struct,
           {
+            variant: NODE_TYPES.NAMESPACE,
             decorators: {
-              Header: (props) => {
-                return (
-                  <Text
-                    style={props.style}
-                    cursor="pointer">
-                    {props.node.name}
-                  </Text>
-                );
-              }
+              Header: props => (
+                <Text
+                  { ...(props.node.active ? { color: '#47B881', fontWeight: 'bold' } : {}) }
+                  style={props.style}
+                  cursor="pointer">
+                  {props.node.name}
+                </Text>
+              )
             },
             children: struct.children.map(child => Object.assign(
               child,
               {
+                variant: NODE_TYPES.FUNCTION,
                 decorators: {
-                  Header: (props) => {
-                    return (
-                      <Text
-                        style={props.style}
-                        { ...(props.node.active ? { color: '#47B881', fontWeight: 'bold' } : {}) }
-                        className="function-text"
-                        onClick={() => this.props.showFunctionRequest(props.node.nSpaceParent, props.node.name)}>
-                        {props.node.name}
-                      </Text>
-                    );
-                  }
+                  Header: props => (
+                    <Text
+                      style={props.style}
+                      { ...(props.node.active ? { color: '#47B881', fontWeight: 'bold' } : {}) }
+                      className="function-text"
+                      onClick={() => this.props.showFunctionRequest(props.node.nSpaceParent, props.node.name)}>
+                      {props.node.name}
+                    </Text>
+                  )
                 }
               }
             )
@@ -68,10 +81,10 @@ class FolderTree extends React.Component {
           })
         ).concat({
           ignore: true,
-          name: 'create new',
+          name: 'new nameSpace',
           children: [],
           decorators: {
-            Header: (props) => {
+            Header: props => {
               return (
                 <Pane
                   display="flex"
@@ -79,13 +92,19 @@ class FolderTree extends React.Component {
                   alignItems="center"
                   alignContent="center"
                 >
-                  <Icon icon="add" color="success"/>
-                  <Text
-                    style={props.style}
-                    marginLeft="8px"
-                    cursor="pointer">
-                    {props.node.name}
-                  </Text>
+                  { dialogState === NAMESPACE_STATES.INVALID ?
+                    <Icon icon="add" color="success"/>
+                    :
+                    <Spinner size={16} color="success" />
+                  }
+                  <NewNameSpacePopover>
+                    <Text
+                      style={props.style}
+                      marginLeft="8px"
+                      cursor="pointer">
+                      {props.node.name}
+                    </Text>
+                  </NewNameSpacePopover>
                 </Pane>
               );
             },
@@ -107,7 +126,7 @@ class FolderTree extends React.Component {
       <Treebeard
         style={treeStyles}
         data={structure}
-        onToggle={this.props.toggleCodeNode}
+        onToggle={this.onToggleNode}
       />
     );
   }
@@ -116,7 +135,7 @@ class FolderTree extends React.Component {
 const mapDispatchToProps = dispatch => {
   return {
     showFunctionRequest: (nSpace, fName) => dispatch(showFunctionRequest(nSpace, fName)),
-    toggleCodeNode: (node, toggled) => dispatch(toggleCodeNode(node, toggled))
+    toggleCodeNode: (node, toggled, nodeVariant) => dispatch(toggleCodeNode(node, toggled, nodeVariant))
   };
 };
 

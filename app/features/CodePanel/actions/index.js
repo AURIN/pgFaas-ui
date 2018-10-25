@@ -11,6 +11,11 @@ const updateCode = code => ({
   code
 });
 
+const updateTestCode = code => ({
+  type: types.SET_TEST_CODE,
+  code
+});
+
 const requestUpdateCode = (nSpace, fName, code) => ({
   type: types.REQUEST_UPDATE_CODE,
   nSpace,
@@ -18,8 +23,18 @@ const requestUpdateCode = (nSpace, fName, code) => ({
   code
 });
 
+const requestCreateFunction = (nSpace, fName, code, testCode) => ({
+  type: types.REQUEST_CREATE_FUNCTION,
+  nSpace,
+  fName,
+  code,
+  testCode
+});
+
 export {
   showFunctionRequest,
   updateCode,
-  requestUpdateCode
+  updateTestCode,
+  requestUpdateCode,
+  requestCreateFunction
 };
