@@ -31,10 +31,34 @@ const requestCreateFunction = (nSpace, fName, code, testCode) => ({
   testCode
 });
 
+const requestDeleteFunction = (nSpace, fName) => ({
+  type: types.REQUEST_DELETE_FUNCTION,
+  nSpace,
+  fName
+});
+
+const requestDeleteNamespace = (nSpace) => ({
+  type: types.REQUEST_DELETE_NAMESPACE,
+  nSpace
+});
+
+const setPanelEmpty = () => ({
+  type: types.SET_PANEL_EMPTY
+});
+
+const showNewFunction = (nSpace) => ({
+  type: types.SHOW_NEW_FUNCTION,
+  nSpace
+});
+
 export {
-  showFunctionRequest,
   updateCode,
   updateTestCode,
   requestUpdateCode,
-  requestCreateFunction
+  requestCreateFunction,
+  requestDeleteFunction,
+  requestDeleteNamespace,
+  showFunctionRequest,
+  setPanelEmpty,
+  showNewFunction
 };

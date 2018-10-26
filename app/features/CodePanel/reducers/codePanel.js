@@ -4,15 +4,25 @@ import * as _ from 'lodash';
 import { NODE_TYPES } from '../../ParametersPanel/actions/types.js';
 
 const initialData = {
-  nodeVariant: null,
+  nodeVariant: NODE_TYPES.EMPTY,
   nSpace: null,
   fName: null,
-  code: '// Code',
-  testInput: '// Test Input'
+  code: '// ',
+  testInput: '// '
 };
 
 export default (state = initialData, action) => {
   switch (action.type) {
+    case  types.SHOW_NEW_FUNCTION:
+      return _.merge(
+        {},
+        state,
+        {
+          nSpace: action.nSpace,
+          fName: null,
+          nodeVariant: NODE_TYPES.NEW_FUNCTION
+        }
+      );
     case paramPaneltypes.TOGGLE_CODE_TREE:
       return _.merge(
         {},
@@ -41,6 +51,18 @@ export default (state = initialData, action) => {
         state,
         {
           code: action.code
+        }
+      );
+    case types.SET_PANEL_EMPTY:
+      return _.merge(
+        {},
+        state,
+        {
+          nodeVariant: NODE_TYPES.EMPTY,
+          nSpace: null,
+          fName: null,
+          code: '// ',
+          testInput: '// '
         }
       );
     case types.SET_TEST_CODE:

@@ -1,54 +1,44 @@
 import * as types from '../actions/types';
-import * as paramPaneltypes from '../../ParametersPanel/actions/types.js';
 import * as _ from 'lodash';
-import { NODE_TYPES } from '../../ParametersPanel/actions/types.js';
 
 const initialData = {
-  nodeVariant: null,
-  nSpace: null,
-  fName: null,
-  code: '// Code',
-  testInput: '// Test Input'
+  consoleState: types.CONSOLE_STATE.NEUTRAL,
+  output: '',
 };
 
 export default (state = initialData, action) => {
   switch (action.type) {
-    case paramPaneltypes.TOGGLE_CODE_TREE:
+    case types.REQUEST_INVOKE_FUNCTION:
       return _.merge(
         {},
         state,
         {
-          nodeVariant: action.nodeVariant,
-          nSpace: action.nSpace,
-          code: action.nodeVariant === NODE_TYPES.NAMESPACE ? '// Write new function' : state.code,
-          testInput: action.nodeVariant === NODE_TYPES.NAMESPACE ? '// Write test parameter' : state.testInput
+          consoleState: types.CONSOLE_STATE.PENDING
         }
       );
-    case types.SAGA_SHOW_FUNCTION_SET_CODE_PANEL:
+    case types.SET_CONSOLE_STATE_NEUTRAL:
       return _.merge(
         {},
         state,
         {
-          nSpace: action.nSpace,
-          fName: action.fName,
-          code: action.code,
-          testInput: action.testInput
+          consoleState: types.CONSOLE_STATE.NEUTRAL,
         }
       );
-    case types.SET_STORE_CODE:
+    case types.SUCCESSS_INVOKE_FUNCTION:
       return _.merge(
         {},
         state,
         {
-          code: action.code
+          consoleState: types.CONSOLE_STATE.NEUTRAL,
+          output: action.output
         }
       );
-    case types.SET_TEST_CODE:
+    case types.RESET_OUTPUT:
       return _.merge(
         {},
         state,
         {
-          testInput: action.code
+          output: ''
         }
       );
     default:

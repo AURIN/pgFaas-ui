@@ -7,7 +7,9 @@ import TestInput from '../TestInput';
 import { requestInvokeFunction } from '../OutputPanel/actions/index.js';
 import {
   requestUpdateCode,
-  requestCreateFunction
+  requestCreateFunction,
+  requestDeleteFunction,
+  requestDeleteNamespace
 } from './actions/index.js';
 import { NODE_TYPES } from '../ParametersPanel/actions/types.js';
 
@@ -23,6 +25,8 @@ class CodePanel extends React.Component {
     this.onCreateClick = this.onCreateClick.bind(this);
     this.onFnNameChange = this.onFnNameChange.bind(this);
     this.onRunClick = this.onRunClick.bind(this);
+    this.onDeleteFunctionClick = this.onDeleteFunctionClick.bind(this);
+    this.onDeleteNameSpaceClick = this.onDeleteNameSpaceClick.bind(this);
   }
 
   componentDidMount () {
@@ -57,6 +61,21 @@ class CodePanel extends React.Component {
     }
   }
 
+  onDeleteFunctionClick () {
+    const {nSpace, fName} = this.props.codePanel;
+    this.props.requestDeleteFunction(
+      nSpace,
+      fName
+    );
+  }
+
+  onDeleteNameSpaceClick () {
+    const {nSpace} = this.props.codePanel;
+    this.props.requestDeleteNamespace(
+      nSpace
+    );
+  }
+
   onFnNameChange (e) {
     this.newFnName = e.target.value;
     this.setState({value: e.target.value});
@@ -86,6 +105,7 @@ class CodePanel extends React.Component {
                 height={32}
                 appearance="minimal"
                 intent="warning"
+                onClick={this.onDeleteFunctionClick}
                 iconAfter="delete">
                 Delete
               </Button>
@@ -101,6 +121,23 @@ class CodePanel extends React.Component {
             </div>
           ]);
         case NODE_TYPES.NAMESPACE:
+          return ([
+            <div>
+              <Text paddingLeft="30px"> Namespace: {`${nSpace}`} </Text>
+            </div>,
+            <div>
+              <Button
+                marginRight={5}
+                height={32}
+                appearance="minimal"
+                intent="warning"
+                onClick={this.onDeleteNameSpaceClick}
+                iconAfter="delete">
+                Delete
+              </Button>
+            </div>
+          ]);
+        case NODE_TYPES.NEW_FUNCTION:
           return ([
             <div/>,
             <div>
@@ -124,10 +161,10 @@ class CodePanel extends React.Component {
               </Button>
             </div>
           ]);
+        case NODE_TYPES.EMPTY:
+          return ([ <div /> ]);
         default:
-          return ([
-            <div />
-          ]);
+          return ([ <div /> ]);
       }
     };
     return (
@@ -151,20 +188,22 @@ class CodePanel extends React.Component {
           border="none">
           { buttonsRender().map((e, inx) => (<div key={inx}> {e}</div>)) }
         </Pane>
-        <CodeInput code={this.props.codePanel.code} />
-        <Pane
-          width="100%"
-          minHeight="8px"
-          display="flex"
-          alignItems="center"
-          marginTop="2px"
-          borderTop="1px solid #C7CED4"
-          borderBottom="1px solid #C7CED4"
-          marginBottom="2px"
-          background="#E4E7EB"
-          justifyContent="flex-end"
-          border="none" />
-        <TestInput code={this.props.codePanel.testInput} />
+        { nodeVariant !== NODE_TYPES.NAMESPACE && <Pane width="100%" height="100%">
+          <CodeInput code={this.props.codePanel.code} />
+          <Pane
+            width="100%"
+            minHeight="8px"
+            display="flex"
+            alignItems="center"
+            marginTop="2px"
+            borderTop="1px solid #C7CED4"
+            borderBottom="1px solid #C7CED4"
+            marginBottom="2px"
+            background="#E4E7EB"
+            justifyContent="flex-end"
+            border="none" />
+          <TestInput code={this.props.codePanel.testInput} />
+        </Pane>}
       </Pane>
     );
   }
@@ -173,7 +212,9 @@ class CodePanel extends React.Component {
 const mapDispatchToProps = dispatch => ({
   requestUpdateCode: (nSpace, fName, code) => dispatch(requestUpdateCode(nSpace, fName, code)),
   requestCreateFunction: (nSpace, fName, code, testCode) => dispatch(requestCreateFunction(nSpace, fName, code, testCode)),
-  requestInvokeFunction: (nSpace, fName, params) => dispatch(requestInvokeFunction(nSpace, fName, params))
+  requestInvokeFunction: (nSpace, fName, params) => dispatch(requestInvokeFunction(nSpace, fName, params)),
+  requestDeleteFunction: (nSpace, fName)  => dispatch(requestDeleteFunction(nSpace, fName)),
+  requestDeleteNamespace: (nSpace) => dispatch(requestDeleteNamespace(nSpace))
 });
 
 const mapStateToProps = state => {
@@ -185,7 +226,9 @@ CodePanel.propTypes = {
   codePanel: PropTypes.object,
   requestUpdateCode: PropTypes.func,
   requestCreateFunction: PropTypes.func,
-  requestInvokeFunction: PropTypes.func
+  requestInvokeFunction: PropTypes.func,
+  requestDeleteFunction: PropTypes.func,
+  requestDeleteNamespace: PropTypes.func
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(CodePanel);

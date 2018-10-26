@@ -4,7 +4,7 @@ import {connect} from 'react-redux';
 import {Treebeard} from 'react-treebeard';
 import { Spinner, Pane, Text, Icon } from 'evergreen-ui';
 import treeStyles from './styles/tree.js';
-import { showFunctionRequest } from '../CodePanel/actions/index.js';
+import { showFunctionRequest, showNewFunction } from '../CodePanel/actions/index.js';
 import { toggleCodeNode } from '../ParametersPanel/actions/index.js';
 import * as _ from 'lodash';
 import './styles/styles.css';
@@ -16,6 +16,7 @@ class FolderTree extends React.Component {
     super(props);
     this.state = {};
     this.onToggleNode = this.onToggleNode.bind(this);
+    this.onNewFunctionClick = this.onNewFunctionClick.bind(this);
   }
 
   onToggleNode (node, toggle) {
@@ -26,6 +27,11 @@ class FolderTree extends React.Component {
         node.variant
       );
     }
+  }
+
+  onNewFunctionClick () {
+    const {nSpace} = this.props.parameterPanel;
+    this.props.showNewFunction(nSpace);
   }
 
   /**
@@ -85,7 +91,38 @@ class FolderTree extends React.Component {
                 }
               }
             )
-            )
+            ).concat({
+              ignore: true,
+              name: 'new Function',
+              children: [],
+              decorators: {
+                Header: props => {
+                  return (
+                    <Pane
+                      display="flex"
+                      marginLeft="-5px"
+                      alignItems="center"
+                      alignContent="center"
+                      onClick={this.onNewFunctionClick}
+                    >
+                      <Icon icon="add" color="success"/>
+                      <Text
+                        className="create-text"
+                        style={props.style}
+                        marginLeft="8px"
+                        cursor="pointer">
+                        {props.node.name}
+                      </Text>
+                    </Pane>
+                  );
+                },
+                Toggle: props => {
+                  return (
+                    <div style={props.style} />
+                  );
+                }
+              }
+            })
           })
         ).concat({
           ignore: true,
@@ -144,6 +181,7 @@ class FolderTree extends React.Component {
 const mapDispatchToProps = dispatch => {
   return {
     showFunctionRequest: (nSpace, fName) => dispatch(showFunctionRequest(nSpace, fName)),
+    showNewFunction: (nSpace) => dispatch(showNewFunction(nSpace)),
     toggleCodeNode: (node, toggled, nodeVariant) => dispatch(toggleCodeNode(node, toggled, nodeVariant))
   };
 };
@@ -156,6 +194,7 @@ const mapStateToProps = state => {
 FolderTree.propTypes = {
   parameterPanel: PropTypes.object,
   showFunctionRequest: PropTypes.func,
+  showNewFunction: PropTypes.func,
   toggleCodeNode: PropTypes.func
 };
 

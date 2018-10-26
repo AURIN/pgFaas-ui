@@ -48,8 +48,26 @@ const createNameSpace = nameSpace =>
     .then(response => ({ response }))
     .catch(error => ({ error }));
 
+/**
+ * Delete namespace
+ */
+const deleteNamespace = namespace =>
+  fetch(
+    API.NAMESPACE(namespace),
+    {
+      method: 'delete',
+      cache: 'no-cache'
+    })
+    .then(res => {
+      if (res.ok) return res.json();
+      throw Error(res.statusText);
+    })
+    .then(response => ({ response }))
+    .catch(error => ({ error }));
+
 export {
   createNameSpace,
   getNameSpaces,
-  getNameSpace
+  getNameSpace,
+  deleteNamespace
 };

@@ -3,6 +3,7 @@ import * as types from '../features/ParametersPanel/actions/types.js';
 import { toaster } from 'evergreen-ui';
 import { getNameSpaces, getNameSpace } from '../lib/api/nameSpaces.js';
 import * as _ from 'lodash';
+import {NODE_TYPES} from '../features/ParametersPanel/actions/types.js';
 
 const buildNameSpaces = () => getNameSpaces()
   .then(nameSpaces => Promise.all(_.map(nameSpaces, getNameSpace)))
@@ -18,9 +19,11 @@ const parameterPanelInit = function* _parameterPanelInit () {
       // Build tree structure
       const newTreeChildren = nameSpaces.map((ns, inx) => ({
         name: ns.nameSpace,
+        type: NODE_TYPES.NAMESPACE,
         path: `children[${inx}]`,
         children: ns.functions.map((f, inx2) => ({
           name: f,
+          type: NODE_TYPES.FUNCTION,
           path: `children[${inx}].children[${inx2}]`,
           nSpaceParent: ns.nameSpace})
         )

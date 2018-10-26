@@ -74,7 +74,7 @@ const invokeFunction = (nSpace, fName, testCode) => fetch(
     cache: 'no-cache',
     headers: { 'Content-Type': 'application/json; charset=utf-8' },
     body: JSON.stringify({
-      'params': testCode,
+      params: testCode,
     })
   })
   .then(res => {
@@ -84,9 +84,29 @@ const invokeFunction = (nSpace, fName, testCode) => fetch(
   .then(response => ({ response }))
   .catch(error => ({ error }));
 
+/**
+ * Invoke a function
+ * @param {String} nSpace
+ * @param {String} fName
+ */
+const deleteFunction = (nSpace, fName) => fetch(
+  API.FUNCTION(nSpace, fName),
+  {
+    method: 'delete',
+    cache: 'no-cache',
+    headers: { 'Content-Type': 'application/json; charset=utf-8' }
+  })
+  .then(res => {
+    if (res.ok) return res.json();
+    throw Error(res.statusText);
+  })
+  .then(response => ({ response }))
+  .catch(error => ({ error }));
+
 export {
-  getFunction,
-  updateFunction,
   createFunction,
-  invokeFunction
+  deleteFunction,
+  getFunction,
+  invokeFunction,
+  updateFunction
 };

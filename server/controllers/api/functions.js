@@ -13,7 +13,7 @@ function getFunction (req, res) {
     })
     .catch(function (error) {
       res.status(500).send({msg: error});
-    })
+    });
 }
 
 /**
@@ -36,7 +36,7 @@ function updateFunction(req, res) {
       })
       .catch(function (error) {
         res.status(500).json(error);
-      })
+      });
   }
 }
 
@@ -64,7 +64,7 @@ function createFunction(req, res) {
       })
       .catch(function (error) {
         res.status(500).json({msg: error.message});
-      })
+      });
   }
 }
 
@@ -88,13 +88,30 @@ function invokeFunction(req, res) {
       })
       .catch(function (error) {
         res.status(500).json({msg: error.message});
-      })
+      });
   }
 }
+
+/**
+ * Delete a function
+ * @param {Request} req Request
+ * @param {Response} res Response
+ */
+function deleteFunction(req, res) {
+  axios.delete(API.FUNCTION(req.params.namespace, req.params.function))
+    .then(function (response) {
+      res.status(200).json(response.data);
+    })
+    .catch(function (error) {
+      res.status(500).json({msg: error.message});
+    });
+}
+
 
 module.exports = {
   getFunction: getFunction,
   updateFunction: updateFunction,
   createFunction: createFunction,
-  invokeFunction: invokeFunction
+  invokeFunction: invokeFunction,
+  deleteFunction: deleteFunction
 }

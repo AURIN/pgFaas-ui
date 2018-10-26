@@ -29,7 +29,7 @@ function getNamespace (req, res) {
     .catch(function (error) {
       res.status(500).json({msg: error.message});
     })
-}
+};
 
 function createNameSpaces (req, res) {
   if (!req.body) {
@@ -49,10 +49,24 @@ function createNameSpaces (req, res) {
         res.status(500).json(error.message);
       })
   }
-}
+};
+
+/**
+ * Deletes a namespace
+ */
+function deleteNamespace(req, res) {
+  axios.delete(API.NAMESPACE(req.params.namespace))
+    .then(function (response) {
+      res.status(200).json(response.data)
+    })
+    .catch(function (error) {
+      res.status(500).json(error.message);
+    });
+};
 
 module.exports = {
   getNamespaces: getNamespaces,
   getNamespace: getNamespace,
-  createNameSpaces: createNameSpaces
+  createNameSpaces: createNameSpaces,
+  deleteNamespace: deleteNamespace
 }

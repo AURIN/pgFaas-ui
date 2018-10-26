@@ -1,9 +1,11 @@
 import * as types from '../actions/types';
 import * as _ from 'lodash';
+const {NODE_TYPES} = types;
 
 const initialData = {
   initialised: false,
   cursor: null,
+  nSpace: null,
   newNameSpaceDialog: {
     state: 'INVALID',
     value: ''
@@ -28,14 +30,25 @@ export default (state = initialData, action) => {
       const newData = _.cloneDeep(state.data);
       const cursor = _.cloneDeep(state.cursor);
 
+      // Inactivate old node
       if (cursor) {
         _.get(newData, cursor.path).active = false;
       }
 
+      // Activate new node
       const clonedNode = _.get(newData, node.path);
       clonedNode.active = true;
       if (clonedNode.children) {
         clonedNode.toggled = toggled;
+      }
+
+      // If open namespace close the other one
+      if( clonedNode.type === NODE_TYPES.NAMESPACE
+          && toggled) {
+        newData
+          .children
+          .filter(nameSpaceNode => nameSpaceNode.name !== clonedNode.name)
+          .forEach(nNode => {nNode.toggled = false;});
       }
 
       return _.merge(
@@ -43,20 +56,15 @@ export default (state = initialData, action) => {
         state,
         {
           cursor: clonedNode,
-          data: newData
+          data: newData,
+          nSpace: _.get(node, 'nSpaceParent', node.name)
         }
       );
 
     case types.SAGA_SET_PARAMETER_PANEL_CHILDREN:
-      return _.merge(
-        {},
-        state,
-        {
-          data: {
-            children: action.data
-          }
-        }
-      );
+      const ret = _.cloneDeep(state);
+      ret.data.children = action.data;
+      return ret;
     case types.SET_NAME_SPACE_STATE:
       return _.merge(
         {},

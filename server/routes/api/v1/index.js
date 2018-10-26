@@ -13,6 +13,9 @@ module.exports = function (app) {
   app.put('/api/v1/namespaces/:namespace/:function', Functions.updateFunction);
 
   app.post('/api/v1/namespaces', Namespaces.createNameSpaces);
-  app.post('/api/v1/namespaces/:namespaces', Functions.createFunction);
-  app.post('/api/v1/namespaces/:namespaces/:function', Functions.invokeFunction);
+  app.post('/api/v1/namespaces/:namespace', Functions.createFunction);
+  app.post('/api/v1/namespaces/:namespace/:function', Functions.invokeFunction);
+
+  app.delete('/api/v1/namespaces/:namespace/:function', Functions.deleteFunction);
+  app.delete('/api/v1/namespaces/:namespace/', Namespaces.deleteNamespace);
 };
