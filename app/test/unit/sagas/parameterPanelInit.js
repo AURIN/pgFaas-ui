@@ -1,7 +1,7 @@
 import * as NameSpaces from '../../../lib/api/nameSpaces.js';
 import { call, put, take } from 'redux-saga/effects';
 import { expectSaga } from 'redux-saga-test-plan';
-import { parameterPanelInit } from '../../../features/ParametersPanel/sagas/index.js';
+import { parameterPanelInit } from '../../../sagas/index.js';
 import sinon from 'sinon';
 import * as types from '../../../features/ParametersPanel/actions/types.js';
 
@@ -24,8 +24,22 @@ test('parameterPanelInit', () => {
     .put({
       type: types.SAGA_SET_PARAMETER_PANEL_CHILDREN,
       data: [
-        {name: 'space1', children: [{name: 'f1', nSpaceParent: 'space1'}, {name: 'f2', nSpaceParent: 'space1'}]},
-        {name: 'space2', children: [{name: 'f1', nSpaceParent: 'space2'}, {name: 'f2', nSpaceParent: 'space2'}]}
+        {
+          name: 'space1',
+          path: 'children[0]',
+          children: [
+            {name: 'f1', nSpaceParent: 'space1', path: 'children[0].children[0]'},
+            {name: 'f2', nSpaceParent: 'space1', path: 'children[0].children[1]'}
+          ]
+        },
+        {
+          name: 'space2',
+          path: 'children[1]',
+          children: [
+            {name: 'f1', nSpaceParent: 'space2', path: 'children[1].children[0]'},
+            {name: 'f2', nSpaceParent: 'space2', path: 'children[1].children[1]'}
+          ]
+        }
       ]
     })
     .run();

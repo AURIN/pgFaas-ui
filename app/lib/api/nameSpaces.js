@@ -43,7 +43,7 @@ const createNameSpace = nameSpace =>
     })
     .then(res => {
       if (res.ok) return res.json();
-      return ({ error: res.statusText});
+      throw Error(res.statusText);
     })
     .then(response => ({ response }))
     .catch(error => ({ error }));

@@ -28,7 +28,10 @@ const updateFunction = (nSpace, fName, code) => fetch(
     headers: { 'Content-Type': 'application/json; charset=utf-8' },
     body: JSON.stringify({'function': code })
   })
-  .then(res => res.json())
+  .then(res => {
+    if (res.ok) return res.json();
+    throw Error(res.statusText);
+  })
   .then(response => ({ response }))
   .catch(error => ({ error }));
 
@@ -51,12 +54,39 @@ const createFunction = (nSpace, fName, code, testCode) => fetch(
       'test': testCode
     })
   })
-  .then(res => res.json())
+  .then(res => {
+    if (res.ok) return res.json();
+    throw Error(res.statusText);
+  })
+  .then(response => ({ response }))
+  .catch(error => ({ error }));
+
+/**
+ * Invoke a function
+ * @param {String} nSpace
+ * @param {String} fName
+ * @param {String} testCode
+ */
+const invokeFunction = (nSpace, fName, testCode) => fetch(
+  API.FUNCTION(nSpace, fName),
+  {
+    method: 'post',
+    cache: 'no-cache',
+    headers: { 'Content-Type': 'application/json; charset=utf-8' },
+    body: JSON.stringify({
+      'params': testCode,
+    })
+  })
+  .then(res => {
+    if (res.ok) return res.json();
+    throw Error(res.statusText);
+  })
   .then(response => ({ response }))
   .catch(error => ({ error }));
 
 export {
   getFunction,
   updateFunction,
-  createFunction
+  createFunction,
+  invokeFunction
 };

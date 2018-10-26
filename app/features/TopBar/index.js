@@ -1,6 +1,7 @@
 import React from 'react';
 import { Pane, Heading} from 'evergreen-ui';
 import '@fortawesome/fontawesome-free/css/all.css';
+import elIcon from '../../assets/elephant.svg';
 
 class TopBar extends React.Component {
   constructor (props) {
@@ -29,23 +30,28 @@ class TopBar extends React.Component {
           justifyContent="center"
           border="none"
         >
-          <i
-            style={{color: 'white'}}
-            className="fas fa-hippo"
-            title="pgFaas">
-          </i>
-          <i
-            style={{color: 'white', paddingLeft: '5px'}}
-            className="fas fa-hippo"
-            title="pgFaas">
-          </i>
-          <i
-            style={{color: 'white', paddingLeft: '5px'}}
-            className="fas fa-hippo"
-            title="pgFaas">
-          </i>
+          <img
+            src={elIcon}
+            style={{color: 'white', paddingLeft: '5px', width: '40px'}}
+            title="Icon by Freepik from www.flaticon.com">
+          </img>
+          <img
+            src={elIcon}
+            style={{color: 'white', paddingLeft: '5px', width: '40px'}}
+            title="Icon by Freepik from www.flaticon.com">
+          </img>
+          <img
+            src={elIcon}
+            style={{color: 'white', paddingLeft: '5px', width: '40px'}}
+            title="Icon by Freepik from www.flaticon.com">
+          </img>
         </Pane>
-        <Heading size={600} color="white"> pgFaas </Heading>
+        <Heading
+          size={600}
+          paddingLeft="40px"
+          color="white">
+            pgFaas
+        </Heading>
       </Pane>
     );
   }

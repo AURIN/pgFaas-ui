@@ -1,17 +1,7 @@
 import { all } from 'redux-saga/effects';
-import { parameterPanelInit, createNewNameSpace } from './features/ParametersPanel/sagas/index.js';
-import {
-  showFunction,
-  updateFunction,
-  createFunction
-} from './features/CodePanel/sagas/index.js';
+import * as sagaFns from './sagas/index.js';
+import * as _ from 'lodash';
 
 export default function* rootSaga () {
-  yield all([
-    createNewNameSpace(),
-    parameterPanelInit(),
-    showFunction(),
-    updateFunction(),
-    createFunction()
-  ]);
+  yield all(_.values(sagaFns).map(fn => fn()));
 }

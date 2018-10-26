@@ -4,6 +4,7 @@ import PropTypes from 'prop-types';
 import { Text, TextInput, Pane, Button } from 'evergreen-ui';
 import CodeInput from '../CodeInput';
 import TestInput from '../TestInput';
+import { requestInvokeFunction } from '../OutputPanel/actions/index.js';
 import {
   requestUpdateCode,
   requestCreateFunction
@@ -21,6 +22,7 @@ class CodePanel extends React.Component {
     this.onUpdateClick = this.onUpdateClick.bind(this);
     this.onCreateClick = this.onCreateClick.bind(this);
     this.onFnNameChange = this.onFnNameChange.bind(this);
+    this.onRunClick = this.onRunClick.bind(this);
   }
 
   componentDidMount () {
@@ -33,6 +35,11 @@ class CodePanel extends React.Component {
       fName,
       code
     );
+  }
+
+  onRunClick () {
+    const {nSpace, fName, testInput} = this.props.codePanel;
+    this.props.requestInvokeFunction(nSpace, fName, testInput);
   }
 
   onCreateClick () {
@@ -87,6 +94,7 @@ class CodePanel extends React.Component {
                 height={32}
                 appearance="default"
                 intent="success"
+                onClick={this.onRunClick}
                 iconAfter="caret-right">
                 Run
               </Button>
@@ -164,7 +172,8 @@ class CodePanel extends React.Component {
 
 const mapDispatchToProps = dispatch => ({
   requestUpdateCode: (nSpace, fName, code) => dispatch(requestUpdateCode(nSpace, fName, code)),
-  requestCreateFunction: (nSpace, fName, code, testCode) => dispatch(requestCreateFunction(nSpace, fName, code, testCode))
+  requestCreateFunction: (nSpace, fName, code, testCode) => dispatch(requestCreateFunction(nSpace, fName, code, testCode)),
+  requestInvokeFunction: (nSpace, fName, params) => dispatch(requestInvokeFunction(nSpace, fName, params))
 });
 
 const mapStateToProps = state => {
@@ -175,7 +184,8 @@ const mapStateToProps = state => {
 CodePanel.propTypes = {
   codePanel: PropTypes.object,
   requestUpdateCode: PropTypes.func,
-  requestCreateFunction: PropTypes.func
+  requestCreateFunction: PropTypes.func,
+  requestInvokeFunction: PropTypes.func
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(CodePanel);

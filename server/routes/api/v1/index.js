@@ -14,4 +14,5 @@ module.exports = function (app) {
 
   app.post('/api/v1/namespaces', Namespaces.createNameSpaces);
   app.post('/api/v1/namespaces/:namespaces', Functions.createFunction);
+  app.post('/api/v1/namespaces/:namespaces/:function', Functions.invokeFunction);
 };
