@@ -26,14 +26,27 @@ yarn install <br>
 Watch the src files: ````yarn run build-dev```` <br>
 Start the server:    ````yarn run start````
 
-#### Build production and run server
+#### Build production and run production server
 
 yarn run build <br>
-yarn run start
+NODE_ENV=production yarn run start
 
 #### Configuration
 
-Application wide configuration files reside in ````config/default.js````
+Server configuration files reside in ````config/default.js```` <br>
+Parameters that can be set :
+
+##### ```` EXPRESS.PORT ````<br>
+
+port express run ons
+
+##### ```` EXPRESS.BIND_ADDRESS````
+
+Ip address express binds to
+
+##### ```` PGFAAS.URL_BASE ````
+
+Location of the API server
 
 ## Changelog
 
