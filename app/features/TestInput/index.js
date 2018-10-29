@@ -1,10 +1,10 @@
 import React from 'react';
 import {connect} from 'react-redux';
 import PropTypes from 'prop-types';
-import { Pane } from 'evergreen-ui';
+import { Pane, Text, defaultTheme } from 'evergreen-ui';
 import {Controlled as CodeMirror} from 'react-codemirror2';
 import { updateTestCode } from '../CodePanel/actions/index.js';
-// import '../CodeInput/styles/styles.css';
+import '../CodeInput/styles/styles.css';
 
 class TestInput extends React.Component {
   constructor (props) {
@@ -13,8 +13,8 @@ class TestInput extends React.Component {
   }
 
   componentDidMount () {
-    // console.warn(this.ref);
-    // window.d = this.ref;
+    console.warn(defaultTheme);
+    window.d = defaultTheme;
   }
 
   render () {
@@ -22,26 +22,48 @@ class TestInput extends React.Component {
       <Pane
         width="100%"
         overflow="hide"
-        height="40%"
+        height="48%"
         display="flex"
+        flexDirection="column"
         alignItems="flex-start"
         justifyContent="flex-start"
         marginTop="2px"
         border="none">
-        <CodeMirror
-          className="code-mir-react"
-          ref={this.ref}
-          value={this.props.code}
-          mode="javascript"
-          autoFocus={true}
-          onBeforeChange={(editor, data, value) => {
-            this.props.updateTestCode(value);
-          }}
-          options={{
-            lineNumbers: true,
-            lineWrapping: true,
-            tabSize: 2,
-          }} />
+        <Pane
+          display="flex"
+          height="5%"
+          width="100%"
+          alignItems="center"
+          flexDirection="row"
+          alignItems="center"
+          justifyContent="center" >
+          <Text
+            fontSize="12px"
+            color={defaultTheme.colors.icon.disabled}>
+              Function Parameters
+          </Text>
+        </Pane>
+        <Pane
+          display="flex"
+          height="95%"
+          alignItems="center"
+          flexDirection="column"
+          justifyContent="center" >
+          <CodeMirror
+            className="code-mir-react"
+            ref={this.ref}
+            value={this.props.code}
+            mode="javascript"
+            autoFocus={true}
+            onBeforeChange={(editor, data, value) => {
+              this.props.updateTestCode(value);
+            }}
+            options={{
+              lineNumbers: true,
+              lineWrapping: true,
+              tabSize: 2,
+            }} />
+        </Pane>
       </Pane>
     );
   }

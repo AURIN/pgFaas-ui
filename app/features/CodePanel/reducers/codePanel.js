@@ -20,7 +20,9 @@ export default (state = initialData, action) => {
         {
           nSpace: action.nSpace,
           fName: null,
-          nodeVariant: NODE_TYPES.NEW_FUNCTION
+          nodeVariant: NODE_TYPES.NEW_FUNCTION,
+          code: '// ',
+          testInput: '// '
         }
       );
     case paramPaneltypes.TOGGLE_CODE_TREE:
@@ -30,8 +32,8 @@ export default (state = initialData, action) => {
         {
           nodeVariant: action.nodeVariant,
           nSpace: action.nSpace,
-          code: action.nodeVariant === NODE_TYPES.NAMESPACE ? '// Write new function' : state.code,
-          testInput: action.nodeVariant === NODE_TYPES.NAMESPACE ? '// Write test parameter' : state.testInput
+          code: action.nodeVariant === NODE_TYPES.NAMESPACE ? '// ' : state.code,
+          testInput: action.nodeVariant === NODE_TYPES.NAMESPACE ? '// ' : state.testInput
         }
       );
     case types.SAGA_SHOW_FUNCTION_SET_CODE_PANEL:

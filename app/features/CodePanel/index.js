@@ -171,6 +171,7 @@ class CodePanel extends React.Component {
       <Pane
         width="42%"
         height="100%"
+        overflow="hidden"
         display="flex"
         alignItems="center"
         flexDirection="column"
@@ -188,7 +189,7 @@ class CodePanel extends React.Component {
           border="none">
           { buttonsRender().map((e, inx) => (<div key={inx}> {e}</div>)) }
         </Pane>
-        { nodeVariant !== NODE_TYPES.NAMESPACE && <Pane width="100%" height="100%">
+        { nodeVariant !== NODE_TYPES.NAMESPACE && <Pane width="100%" height="95%">
           <CodeInput code={this.props.codePanel.code} />
           <Pane
             width="100%"
