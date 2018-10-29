@@ -31,14 +31,14 @@ Start the server:    ````yarn run start````
 yarn run build <br>
 NODE_ENV=production yarn run start
 
-#### Configuration
+### Configuration
 
-Server configuration files reside in ````config/default.js```` <br>
+Server configuration file resides in ````config/default.js```` <br>
 Parameters that can be set :
 
 ##### ```` EXPRESS.PORT ````<br>
 
-port express run ons
+port express runs on
 
 ##### ```` EXPRESS.BIND_ADDRESS````
 
