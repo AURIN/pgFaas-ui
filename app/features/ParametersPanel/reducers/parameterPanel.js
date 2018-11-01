@@ -31,7 +31,7 @@ export default (state = initialData, action) => {
       const cursor = _.cloneDeep(state.cursor);
 
       // Inactivate old node
-      if (cursor) {
+      if (cursor && _.get(newData, cursor.path + '.active') !== undefined) {
         _.get(newData, cursor.path).active = false;
       }
 

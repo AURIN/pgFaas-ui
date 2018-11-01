@@ -22,7 +22,7 @@ const parameterPanelInit = function* _parameterPanelInit () {
         type: NODE_TYPES.NAMESPACE,
         path: `children[${inx}]`,
         children: ns.functions.map((f, inx2) => ({
-          name: f,
+          name: f.name,
           type: NODE_TYPES.FUNCTION,
           path: `children[${inx}].children[${inx2}]`,
           nSpaceParent: ns.nameSpace})

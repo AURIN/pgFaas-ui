@@ -7,7 +7,7 @@ const defaultConfig = {
     BIND_ADDRESS: "localhost"
   },
   PGFAAS: {
-    URL_BASE: 'http://localhost:3010'
+    URL_BASE: 'http://103.6.252.7/api/'
   }
 };
 
@@ -21,7 +21,7 @@ const prodConfig = {
     BIND_ADDRESS: "0.0.0.0"
   },
   PGFAAS: {
-    URL_BASE: 'http://localhost:3010'
+    URL_BASE: 'http://103.6.252.7/api/'
   }
 };
 
