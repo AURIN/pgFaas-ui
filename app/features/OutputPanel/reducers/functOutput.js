@@ -3,7 +3,7 @@ import * as _ from 'lodash';
 
 const initialData = {
   consoleState: types.CONSOLE_STATE.NEUTRAL,
-  output: '',
+  output: [],
 };
 
 export default (state = initialData, action) => {
@@ -38,17 +38,12 @@ export default (state = initialData, action) => {
         state,
         {
           consoleState: types.CONSOLE_STATE.NEUTRAL,
-          output: action.output
+          output: [...state.output, action.output]
         }
       );
     case types.RESET_OUTPUT:
-      return _.merge(
-        {},
-        state,
-        {
-          output: ''
-        }
-      );
+      state.output = [];
+      return _.merge({}, state);
     default:
       return state;
   }

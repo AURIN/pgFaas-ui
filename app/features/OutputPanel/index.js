@@ -9,6 +9,13 @@ import './styles/styles.css';
 class OutputPanel extends React.Component {
   constructor (props) {
     super(props);
+    this.consoleEndRef = React.createRef();
+  }
+
+  componentDidUpdate () {
+    if (this.consoleEndRef.current !== null) {
+      this.consoleEndRef.current.scrollIntoView({ behavior: 'smooth' });
+    }
   }
 
   render () {
@@ -80,13 +87,20 @@ class OutputPanel extends React.Component {
           opacity={0.9}
           height="100%"
           width="100%"
+          overflow="scroll"
           display="flex"
-          flexDirection="row"
+          flexDirection="column"
           alignItems="flex-start"
           alignContent="flex-start"
           justifyContent="flex-start"
           border="none" >
-          <Text color="white"> >> { output } </Text>
+          {
+            output.map((out, inx) => (
+              <Text color="white" key={inx}> >> { out } </Text>
+            ))
+          }
+          <Text color="white"> >> </Text>
+          <div ref={this.consoleEndRef} />
         </Pane>
       </Pane>
     );
