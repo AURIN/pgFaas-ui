@@ -16,6 +16,14 @@ export default (state = initialData, action) => {
           consoleState: types.CONSOLE_STATE.PENDING
         }
       );
+    case types.REQUEST_INVOKE_FAILED:
+      return _.merge(
+        {},
+        state,
+        {
+          consoleState: types.CONSOLE_STATE.FAILED
+        }
+      );
     case types.SET_CONSOLE_STATE_NEUTRAL:
       return _.merge(
         {},

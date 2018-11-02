@@ -76,12 +76,12 @@ function createFunction(req, res) {
 function invokeFunction(req, res) {
   if (!req.body) {
     res.status(400).send({msg: 'Missing body in payload.'});
-  } else if (!req.body.params) {
-    res.status(400).send({msg: 'Payload must have a params key'});
+  } else if (!req.body.test) {
+    res.status(400).send({msg: 'Payload must have a  test key'});
   } else {
     axios.post(
         API.FUNCTION(req.params.namespace, req.params.function),
-        req.body
+        req.body.test
       )
       .then(function (response) {
         res.status(200).json(response.data);

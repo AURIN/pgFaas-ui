@@ -73,12 +73,10 @@ const invokeFunction = (nSpace, fName, testCode) => fetch(
     method: 'post',
     cache: 'no-cache',
     headers: { 'Content-Type': 'application/json; charset=utf-8' },
-    body: JSON.stringify({
-      params: testCode,
-    })
+    body: JSON.stringify({test: testCode})
   })
   .then(res => {
-    if (res.ok) return res.json();
+    if (res.ok) return res.text();
     throw Error(res.statusText);
   })
   .then(response => ({ response }))

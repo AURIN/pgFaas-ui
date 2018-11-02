@@ -23,6 +23,18 @@ class OutputPanel extends React.Component {
               <Text marginLeft="5px"> Running function ... </Text>
             </Pane>
           ]);
+        case CONSOLE_STATE.FAILED:
+          return ([
+            <div />,
+            <Pane marginRight="8px" cursor="pointer">
+              <Icon
+                className="reset-hover"
+                color="gray"
+                icon="repeat"
+                onClick={() => this.props.resetOutput()}
+                title="clear" />
+            </Pane>
+          ]);
         case CONSOLE_STATE.NEUTRAL:
           return ([
             <div />,

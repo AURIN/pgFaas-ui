@@ -7,6 +7,10 @@ const requestInvokeFunction = (nSpace, fName, params) => ({
   params
 });
 
+const requestInvokeFailed = () => ({
+  type: types.REQUEST_INVOKE_FAILED
+});
+
 const successInvokeFunction = (nSpace, fName, output) => ({
   type: types.SUCCESSS_INVOKE_FUNCTION,
   nSpace,
@@ -24,6 +28,7 @@ const resetOutput = ()  => ({
 
 export {
   requestInvokeFunction,
+  requestInvokeFailed,
   successInvokeFunction,
   setStateNeutral,
   resetOutput
