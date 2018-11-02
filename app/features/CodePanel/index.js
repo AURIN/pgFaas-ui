@@ -203,7 +203,9 @@ class CodePanel extends React.Component {
             background="#E4E7EB"
             justifyContent="flex-end"
             border="none" />
-          <TestInput code={this.props.codePanel.testInput} />
+          <TestInput
+            code={this.props.codePanel.testInput}
+            testCodeError={this.props.codePanel.testCodeError} />
         </Pane>}
       </Pane>
     );

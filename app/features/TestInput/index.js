@@ -42,6 +42,11 @@ class TestInput extends React.Component {
             color={defaultTheme.colors.icon.disabled}>
               Function Parameters
           </Text>
+          <Text
+            fontSize="12px"
+            color="red">
+            { ' ' + this.props.testCodeError }
+          </Text>
         </Pane>
         <Pane
           display="flex"
@@ -75,7 +80,9 @@ const mapDispatchToProps = dispatch => ({
 
 TestInput.propTypes = {
   code: PropTypes.string,
-  updateTestCode: PropTypes.func
+  error: PropTypes.string,
+  updateTestCode: PropTypes.func,
+  testCodeError: PropTypes.string
 };
 
 export default connect(null, mapDispatchToProps)(TestInput);

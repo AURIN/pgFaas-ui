@@ -8,7 +8,8 @@ const initialData = {
   nSpace: null,
   fName: null,
   code: '// ',
-  testInput: '// '
+  testInput: '// ',
+  testCodeError: ''
 };
 
 export default (state = initialData, action) => {
@@ -22,7 +23,8 @@ export default (state = initialData, action) => {
           fName: null,
           nodeVariant: NODE_TYPES.NEW_FUNCTION,
           code: '// ',
-          testInput: '// '
+          testInput: '// ',
+          testCodeError: ''
         }
       );
     case paramPaneltypes.TOGGLE_CODE_TREE:
@@ -33,7 +35,8 @@ export default (state = initialData, action) => {
           nodeVariant: action.nodeVariant,
           nSpace: action.nSpace,
           code: action.nodeVariant === NODE_TYPES.NAMESPACE ? '// ' : state.code,
-          testInput: action.nodeVariant === NODE_TYPES.NAMESPACE ? '// ' : state.testInput
+          testInput: action.nodeVariant === NODE_TYPES.NAMESPACE ? '// ' : state.testInput,
+          testCodeError: ''
         }
       );
     case types.SAGA_SHOW_FUNCTION_SET_CODE_PANEL:
@@ -44,7 +47,8 @@ export default (state = initialData, action) => {
           nSpace: action.nSpace,
           fName: action.fName,
           code: action.code,
-          testInput: action.testInput
+          testInput: action.testInput,
+          testCodeError: ''
         }
       );
     case types.SET_STORE_CODE:
@@ -64,7 +68,8 @@ export default (state = initialData, action) => {
           nSpace: null,
           fName: null,
           code: '// ',
-          testInput: '// '
+          testInput: '// ',
+          testCodeError: ''
         }
       );
     case types.SET_TEST_CODE:
@@ -73,6 +78,14 @@ export default (state = initialData, action) => {
         state,
         {
           testInput: action.code
+        }
+      );
+    case types.SET_TEST_CODE_ERROR:
+      return _.merge(
+        {},
+        state,
+        {
+          testCodeError: action.value
         }
       );
     default:

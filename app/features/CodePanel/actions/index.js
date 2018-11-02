@@ -46,6 +46,11 @@ const setPanelEmpty = () => ({
   type: types.SET_PANEL_EMPTY
 });
 
+const setTestCodeError = value => ({
+  type: types.SET_TEST_CODE_ERROR,
+  value
+});
+
 const showNewFunction = (nSpace) => ({
   type: types.SHOW_NEW_FUNCTION,
   nSpace
@@ -60,5 +65,6 @@ export {
   requestDeleteNamespace,
   showFunctionRequest,
   setPanelEmpty,
+  setTestCodeError,
   showNewFunction
 };

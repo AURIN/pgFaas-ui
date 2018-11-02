@@ -2,6 +2,7 @@ import { take, call, put } from 'redux-saga/effects';
 import { invokeFunction as invokeFunctionCall } from '../lib/api/functions.js';
 import * as types from '../features/OutputPanel/actions/types.js';
 import { successInvokeFunction, requestInvokeFailed } from '../features/OutputPanel/actions/index.js';
+import { setTestCodeError } from '../features/CodePanel/actions/index.js';
 import { toaster } from 'evergreen-ui';
 
 const invokeFunction = function* _invokeFunction () {
@@ -10,6 +11,11 @@ const invokeFunction = function* _invokeFunction () {
 
     try {
       const testAsJson = JSON.parse(action.params);
+
+      if (!testAsJson.verb) {
+        yield put(setTestCodeError('Must have a verb key'));
+        throw new Error('Must have a verb key');
+      }
 
       const {response, error} = yield call(
         invokeFunctionCall,
@@ -24,6 +30,7 @@ const invokeFunction = function* _invokeFunction () {
           action.fName,
           response
         ));
+        yield put(setTestCodeError(''));
       } else {
         toaster.danger('Could not invoke function');
         yield put(requestInvokeFailed());
