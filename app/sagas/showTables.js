@@ -34,6 +34,7 @@ const showTables = function* _showTables () {
       yield put({ type: types.SET_SELECTED_PARAMETER_DB});
     } else {
       console.warn(error);
+      yield put({ type: types.SET_SELECTED_PARAMETER_DB, dbData: [] });
       toaster.danger('Could not load tables');
     }
   }

@@ -38,6 +38,7 @@ const invokeFunction = function* _invokeFunction () {
       }
     } catch(err) {
       toaster.danger('Could not invoke function');
+      yield put(setTestCodeError('Test Input was not valid JSON'));
       yield put(requestInvokeFailed());
       console.warn(err);
     }

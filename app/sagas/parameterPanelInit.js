@@ -35,6 +35,7 @@ const parameterPanelInit = function* _parameterPanelInit () {
       yield put({ type: types.SET_SELECTED_PARAMETER_NS_FUNC, data: newTreeChildren });
     } else {
       console.warn(error);
+      yield put({ type: types.SET_SELECTED_PARAMETER_NS_FUNC, data: [] });
       toaster.danger('Could not load nameSpaces');
     }
   }

@@ -12,7 +12,7 @@ function getFunction (req, res) {
       res.status(200).send(response.data);
     })
     .catch(function (error) {
-      res.status(500).send({msg: error});
+      res.status(500).json({msg: error.message});
     });
 }
 
@@ -35,7 +35,7 @@ function updateFunction(req, res) {
         res.status(200).json(response.data)
       })
       .catch(function (error) {
-        res.status(500).json(error);
+        res.status(500).json({msg: error.message});
       });
   }
 }
@@ -55,16 +55,23 @@ function createFunction(req, res) {
   } else if (!req.body.test) {
     res.status(400).send({msg: 'Payload must have a test key'});
   } else {
-    axios.post(
-        API.NAMESPACE(req.params.namespace),
-        req.body
-      )
-      .then(function (response) {
-        res.status(200).json(response.data);
-      })
-      .catch(function (error) {
-        res.status(500).json({msg: error.message});
-      });
+    try {
+      const test = JSON.parse(req.body.test);
+      axios({
+          method: 'post',
+          url: API.NAMESPACE(req.params.namespace),
+          data: {name: req.body.name, sourcecode: req.body.sourcecode, test: test },
+          headers: { 'Content-Type': 'application/json; charset=utf-8' }
+        })
+        .then(function (response) {
+          res.status(200).json(response.data);
+        })
+        .catch(function (error) {
+          res.status(500).json({msg: error.message, data: error.response.data});
+        });
+    } catch(err) {
+      res.status(500).json({msg: err.message});
+    }
   }
 }
 
@@ -87,7 +94,7 @@ function invokeFunction(req, res) {
         res.status(200).json(response.data);
       })
       .catch(function (error) {
-        res.status(500).json({msg: error.message});
+        res.status(500).json({msg: error.message, data: error.data});
       });
   }
 }

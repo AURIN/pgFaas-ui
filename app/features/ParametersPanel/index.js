@@ -82,6 +82,11 @@ class ParametersPanel extends React.Component {
           <Pane
             className="parameter-panel-tab"
             onClick={this.props.showNameSpacePanel}
+            { ...(selectedParameter === PARAMETER_TYPES.NS_FUNC ? {
+              borderTop: '1px solid #c1c1d7',
+              borderLeft: '1px solid #c1c1d7',
+              borderRight: '1px solid #c1c1d7'
+            } : {}) }
             width="45%"
             height="32px"
             display="flex"
@@ -97,6 +102,11 @@ class ParametersPanel extends React.Component {
           <Pane
             className="parameter-panel-tab"
             onClick={this.props.showDbPanel}
+            { ...(selectedParameter === PARAMETER_TYPES.DATABASES ? {
+              borderTop: '1px solid #c1c1d7',
+              borderLeft: '1px solid #c1c1d7',
+              borderRight: '1px solid #c1c1d7'
+            } : {}) }
             width="45%"
             display="flex"
             height="32px"

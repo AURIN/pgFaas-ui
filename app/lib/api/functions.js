@@ -7,13 +7,19 @@ import * as API from './extensions.js';
  */
 const getFunction = (nSpace, fName) =>
   fetch(API.FUNCTION(nSpace, fName), { method: 'get', cache: 'no-cache' })
+    .then(res => {
+      if (res.ok) return res.json();
+      throw Error(res.statusText);
+    })
     .then(res => res.json())
     .then(res => ({
       nSpace: nSpace,
       fName: fName,
       code: res.sourcecode,
       testInput: res.test
-    }));
+    }))
+    .then(response => ({ response }))
+    .catch(error => ({ error }));
 
 /**
  * Update a function

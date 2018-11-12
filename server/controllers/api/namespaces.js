@@ -46,7 +46,7 @@ function createNameSpaces (req, res) {
         res.status(200).json(response.data)
       })
       .catch(function (error) {
-        res.status(500).json(error.message);
+        res.status(500).json({msg: error.message});
       })
   }
 };
@@ -60,7 +60,7 @@ function deleteNamespace(req, res) {
       res.status(200).json(response.data)
     })
     .catch(function (error) {
-      res.status(500).json(error.message);
+      res.status(500).json({msg: error.message});
     });
 };
 

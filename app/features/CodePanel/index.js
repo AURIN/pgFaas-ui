@@ -85,6 +85,8 @@ class CodePanel extends React.Component {
     const { nodeVariant, fName, nSpace } = this.props.codePanel;
     const buttonsRender = () => {
       switch(nodeVariant) {
+        case NODE_TYPES.NONE:
+          return (<div />);
         case NODE_TYPES.FUNCTION:
           return ([
             <div>
