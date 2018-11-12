@@ -12,7 +12,9 @@ const buildNameSpaces = () => getNameSpaces()
 
 const parameterPanelInit = function* _parameterPanelInit () {
   while(true) {
-    yield take(types.PARAMETER_PANEL_INIT);
+    yield take([types.PARAMETER_PANEL_INIT, types.SET_SELECTED_PARAMETER_NS_FUNC]);
+    yield put({ type: types.SET_SELECTED_PARAMETER_LOADING });
+
     const { response: nameSpaces, error } = yield call(buildNameSpaces);
 
     if (nameSpaces) {
@@ -29,10 +31,8 @@ const parameterPanelInit = function* _parameterPanelInit () {
         )
       }));
 
-      yield put({
-        type: types.SAGA_SET_PARAMETER_PANEL_CHILDREN,
-        data: newTreeChildren
-      });
+      yield put({ type: types.SAGA_SET_NS_CHILDREN, data: newTreeChildren });
+      yield put({ type: types.SET_SELECTED_PARAMETER_NS_FUNC, data: newTreeChildren });
     } else {
       console.warn(error);
       toaster.danger('Could not load nameSpaces');

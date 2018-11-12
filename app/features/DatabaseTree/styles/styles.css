@@ -1,0 +1,10 @@
+.function-text:hover {
+  color: #47B881;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.create-text:hover {
+  color: #47B881;
+  font-weight: bold;
+}
