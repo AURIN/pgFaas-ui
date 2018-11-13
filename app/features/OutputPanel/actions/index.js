@@ -1,10 +1,10 @@
 import * as types from './types';
 
-const requestInvokeFunction = (nSpace, fName, params) => ({
+const requestInvokeFunction = (nSpace, fName, test) => ({
   type: types.REQUEST_INVOKE_FUNCTION,
   nSpace,
   fName,
-  params
+  test
 });
 
 const requestInvokeFailed = () => ({
@@ -12,10 +12,25 @@ const requestInvokeFailed = () => ({
 });
 
 const successInvokeFunction = (nSpace, fName, output) => ({
-  type: types.SUCCESSS_INVOKE_FUNCTION,
+  type: types.ADD_OUTPUT,
   nSpace,
   fName,
-  output
+  output,
+  msgType: types.MESSAGE_TYPE.INVOKE_SUCCESS_OUTPUT
+});
+
+const failureInvokeFunction = (nSpace, fName, output) => ({
+  type: types.ADD_OUTPUT,
+  nSpace,
+  fName,
+  output,
+  msgType: types.MESSAGE_TYPE.INVOKE_FAILURE_OUTPUT
+});
+
+const addOutputFailure = output => ({
+  type: types.ADD_OUTPUT,
+  output,
+  msgType: types.MESSAGE_TYPE.INVOKE_FAILURE_OUTPUT
 });
 
 const setStateNeutral = () => ({
@@ -27,9 +42,11 @@ const resetOutput = ()  => ({
 });
 
 export {
+  addOutputFailure,
   requestInvokeFunction,
   requestInvokeFailed,
   successInvokeFunction,
+  failureInvokeFunction,
   setStateNeutral,
   resetOutput
 };

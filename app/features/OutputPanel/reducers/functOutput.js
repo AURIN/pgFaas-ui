@@ -3,6 +3,7 @@ import * as _ from 'lodash';
 
 const initialData = {
   consoleState: types.CONSOLE_STATE.NEUTRAL,
+  outputCounter: 0,
   output: [],
 };
 
@@ -32,13 +33,21 @@ export default (state = initialData, action) => {
           consoleState: types.CONSOLE_STATE.NEUTRAL,
         }
       );
-    case types.SUCCESSS_INVOKE_FUNCTION:
+    case types.ADD_OUTPUT:
       return _.merge(
         {},
         state,
         {
           consoleState: types.CONSOLE_STATE.NEUTRAL,
-          output: [...state.output, action.output]
+          outputCounter: state.outputCounter + 1,
+          output: [
+            ...state.output,
+            {
+              output: action.output,
+              msgType: action.msgType,
+              counter: state.outputCounter + 1,
+            }
+          ]
         }
       );
     case types.RESET_OUTPUT:

@@ -33,11 +33,12 @@ class CodePanel extends React.Component {
   }
 
   onUpdateClick () {
-    const {nSpace, fName, code} = this.props.codePanel;
+    const {nSpace, fName, code, testInput} = this.props.codePanel;
     this.props.requestUpdateCode(
       nSpace,
       fName,
-      code
+      code,
+      testInput
     );
   }
 
@@ -215,7 +216,7 @@ class CodePanel extends React.Component {
 }
 
 const mapDispatchToProps = dispatch => ({
-  requestUpdateCode: (nSpace, fName, code) => dispatch(requestUpdateCode(nSpace, fName, code)),
+  requestUpdateCode: (nSpace, fName, code, test) => dispatch(requestUpdateCode(nSpace, fName, code, test)),
   requestCreateFunction: (nSpace, fName, code, testCode) => dispatch(requestCreateFunction(nSpace, fName, code, testCode)),
   requestInvokeFunction: (nSpace, fName, params) => dispatch(requestInvokeFunction(nSpace, fName, params)),
   requestDeleteFunction: (nSpace, fName)  => dispatch(requestDeleteFunction(nSpace, fName)),

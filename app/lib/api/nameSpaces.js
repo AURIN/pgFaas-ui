@@ -20,7 +20,7 @@ const getNameSpaces = () => {
 /**
  * Get the functions in namespace
  */
-const getNameSpace = (nameSpace) =>
+const getNameSpace = nameSpace =>
   fetch(API.NAMESPACE(nameSpace), { method: 'get', cache: 'no-cache' })
     .then(res => {
       if (res.ok) return res.json();

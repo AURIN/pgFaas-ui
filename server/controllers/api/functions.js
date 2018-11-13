@@ -24,19 +24,30 @@ function getFunction (req, res) {
 function updateFunction(req, res) {
   if (!req.body) {
     res.status(400).send({msg: 'Missing body in payload.'});
-  } else if (!req.body.function) {
-    res.status(400).send({msg: 'Payload must have a function key'});
+  } else if (!req.body.name) {
+    res.status(400).send({msg: 'Payload must have a name key'});
+  } else if (!req.body.sourcecode) {
+    res.status(400).send({msg: 'Payload must have a sourcecode key'});
+  } else if (!req.body.test) {
+    res.status(400).send({msg: 'Payload must have a test key'});
   } else {
-    axios.put(
-        API.FUNCTION(req.params.namespace, req.params.function),
-        req.body
-      )
-      .then(function (response) {
-        res.status(200).json(response.data)
-      })
-      .catch(function (error) {
-        res.status(500).json({msg: error.message});
-      });
+    try {
+      const test = JSON.parse(req.body.test);
+      axios({
+          method: 'put',
+          url: API.FUNCTION(req.params.namespace, req.params.function),
+          data: {name: req.body.name, sourcecode: req.body.sourcecode, test: test },
+          headers: { 'Content-Type': 'application/json; charset=utf-8' }
+        })
+        .then(function (response) {
+          res.status(200).json(response.data)
+        })
+        .catch(function (error) {
+          res.status(500).json({msg: error.message});
+        });
+    } catch(err) {
+      res.status(500).json({msg: err.message, data: err.response.data});
+    }
   }
 }
 
@@ -84,18 +95,25 @@ function invokeFunction(req, res) {
   if (!req.body) {
     res.status(400).send({msg: 'Missing body in payload.'});
   } else if (!req.body.test) {
-    res.status(400).send({msg: 'Payload must have a  test key'});
+    res.status(400).send({msg: 'Payload must have a test key'});
   } else {
-    axios.post(
-        API.FUNCTION(req.params.namespace, req.params.function),
-        req.body.test
-      )
-      .then(function (response) {
-        res.status(200).json(response.data);
-      })
-      .catch(function (error) {
-        res.status(500).json({msg: error.message, data: error.data});
-      });
+    try {
+      const test = JSON.parse(req.body.test);
+      axios({
+          method: 'post',
+          url: API.FUNCTION(req.params.namespace, req.params.function),
+          data: test,
+          headers: { 'Content-Type': 'application/json; charset=utf-8' }
+        })
+        .then(function (response) {
+          res.status(200).json(response.data);
+        })
+        .catch(function (error) {
+          res.status(500).json({msg: error.message, data: error.response.data});
+        });
+    } catch(err) {
+      res.status(500).json({msg: err.message, data: err.response.data});
+    }
   }
 }
 

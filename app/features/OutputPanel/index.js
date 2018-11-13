@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import {connect} from 'react-redux';
 import { Icon, Spinner, Pane, Text, defaultTheme} from 'evergreen-ui';
-import { CONSOLE_STATE } from './actions/types.js';
+import { CONSOLE_STATE, MESSAGE_TYPE } from './actions/types.js';
 import { resetOutput } from './actions/index.js';
 import './styles/styles.css';
 
@@ -60,6 +60,44 @@ class OutputPanel extends React.Component {
           ]);
       }
     };
+
+    const consoleOutText = (msg) => {
+      switch (msg.msgType) {
+        case MESSAGE_TYPE.INVOKE_SUCCESS_OUTPUT:
+          return(
+            <Pane
+              key={msg.counter}
+              width="10%"
+              flex="0 0 auto"
+              display="flex"
+              alignItems="flex-start"
+              flexDirection="row"
+              justifyContent="flex-start"
+              border="none">
+              <Text whiteSpace="pre" color="white" > >> </Text>
+              <Text whiteSpace="pre" color="white" > { msg.output } </Text>
+            </Pane>
+          );
+        case MESSAGE_TYPE.INVOKE_FAILURE_OUTPUT:
+          return(
+            <Pane
+              key={msg.counter}
+              width="10%"
+              flex="0 0 auto"
+              display="flex"
+              alignItems="flex-start"
+              flexDirection="row"
+              justifyContent="flex-start"
+              border="none">
+              <Text whiteSpace="pre" color="white" > >> </Text>
+              <Text color="#EC4C47" > { msg.output } </Text>
+            </Pane>
+          );
+        default:
+          return (<div/>);
+      }
+    };
+
     return(
       <Pane
         width="42%"
@@ -94,12 +132,8 @@ class OutputPanel extends React.Component {
           alignContent="flex-start"
           justifyContent="flex-start"
           border="none" >
-          {
-            output.map((out, inx) => (
-              <Text color="white" key={inx}> >> { out } </Text>
-            ))
-          }
-          <Text color="white"> >> </Text>
+          { output.map((out, inx) => consoleOutText(out, inx)) }
+          <Pane> <Text color="white"> >> </Text> </Pane>
           <div ref={this.consoleEndRef} />
         </Pane>
       </Pane>

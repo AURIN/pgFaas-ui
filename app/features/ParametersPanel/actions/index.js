@@ -22,7 +22,7 @@ const toggleDbNode = (node, toggled, nodeVariant) => ({
   nodeVariant
 });
 
-const setNewNameSpaceValue = (value) => ({type: types.SET_NEW_NAME_SPACE_VALUE, value});
+const setNewNameSpaceValue = value => ({type: types.SET_NEW_NAME_SPACE_VALUE, value});
 const setCreateNameSpaceStateInvalid = () => ({type: types.SET_NAME_SPACE_STATE, state: types.NAMESPACE_STATES.INVALID});
 const setCreateNameSpaceStatePending = () => ({type: types.SET_NAME_SPACE_STATE, state: types.NAMESPACE_STATES.PENDING});
 const setCreateNameSpaceStateCreated = () => ({type: types.SET_NAME_SPACE_STATE, state: types.NAMESPACE_STATES.CREATED});

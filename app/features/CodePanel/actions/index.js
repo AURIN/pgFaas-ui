@@ -16,11 +16,12 @@ const updateTestCode = code => ({
   code
 });
 
-const requestUpdateCode = (nSpace, fName, code) => ({
+const requestUpdateCode = (nSpace, fName, code, test) => ({
   type: types.REQUEST_UPDATE_CODE,
   nSpace,
   fName,
-  code
+  code,
+  test
 });
 
 const requestCreateFunction = (nSpace, fName, code, testCode) => ({

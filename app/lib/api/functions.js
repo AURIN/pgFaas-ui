@@ -11,7 +11,6 @@ const getFunction = (nSpace, fName) =>
       if (res.ok) return res.json();
       throw Error(res.statusText);
     })
-    .then(res => res.json())
     .then(res => ({
       nSpace: nSpace,
       fName: fName,
@@ -26,13 +25,17 @@ const getFunction = (nSpace, fName) =>
  * @param {String} nSpace
  * @param {String} fName
  */
-const updateFunction = (nSpace, fName, code) => fetch(
+const updateFunction = (nSpace, fName, code, test) => fetch(
   API.FUNCTION(nSpace, fName),
   {
     method: 'put',
     cache: 'no-cache',
     headers: { 'Content-Type': 'application/json; charset=utf-8' },
-    body: JSON.stringify({'function': code })
+    body: JSON.stringify({
+      'name': fName,
+      'sourcecode': code,
+      'test': test
+    })
   })
   .then(res => {
     if (res.ok) return res.json();
@@ -62,7 +65,9 @@ const createFunction = (nSpace, fName, code, testCode) => fetch(
   })
   .then(res => {
     if (res.ok) return res.json();
-    throw Error(res.statusText);
+    return res.text().then(function (err) {
+      throw Error(JSON.parse(err).data.message);
+    });
   })
   .then(response => ({ response }))
   .catch(error => ({ error }));
@@ -83,7 +88,9 @@ const invokeFunction = (nSpace, fName, testCode) => fetch(
   })
   .then(res => {
     if (res.ok) return res.text();
-    throw Error(res.statusText);
+    return res.text().then(function (err) {
+      throw Error(JSON.parse(err).data.message);
+    });
   })
   .then(response => ({ response }))
   .catch(error => ({ error }));

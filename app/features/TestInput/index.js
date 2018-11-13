@@ -13,7 +13,6 @@ class TestInput extends React.Component {
   }
 
   componentDidMount () {
-    console.warn(defaultTheme);
     window.d = defaultTheme;
   }
 
