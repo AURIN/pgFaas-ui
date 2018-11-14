@@ -4,6 +4,6 @@
     "BIND_ADDRESS": "BIND_ADDRESS"
   },
   "PGFAAS": {
-    "URL_BASE": "PGFAAS_URL_BASE"
+    "URL_BASE": "PGFAAS_API_URL"
   }
 }
