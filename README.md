@@ -1,52 +1,45 @@
-# pgFaas-Ui
+# pgFaas-UI
 
-Front-end interface for FaaS on PostGIS
+Front-end interface for pgFaas
 
-## Table of Contents
-
-* [Requiremets](#install)
-* [Install](#install)
-* [Usage](#usage)
-* [Config](#config)
-* [Changelog](#changelog)
 
 ## Requirements
-
-* Node (8.11.3)
+* Node (8.11.4)
 * Yarn (1.9.4)
 
-## Install
+
+## Installation
 ```bash
-yarn install
+  yarn install
 ```
 
 ## Usage
-#### Run dev server
 
+### Run dev server
 ```bash
   NODE_ENV=development yarn run start
 ```
 
-#### Run production server
 
+### Run production server
 ```bash
   NODE_ENV=production yarn run start
 ```
 
-#### Build dist
 
+#### Build dist
 The application can also be built to the dist folder if the user
 wants to server the files a different way.
 ```bash
   yarn run build-dev
 ```
 
-## Configuration
 
+## Configuration
 Server configuration file resides in ````config/config.js````
 
-## Building and deployment of a Docker image (optional)
 
+## Building and deployment of a Docker image (optional)
 Docker registry username and password can be set in the `secrets.sh` script,
 which, for obvious reasons, is not pushed to the repository.
 
@@ -87,11 +80,12 @@ To test it, just point your browser to: `http://172.17.0.3:3020/`
 
 To deploy a sandbox version of the UI, `NODE_ENV` has to be set to `sandbox`.
 
-## Feature switches
 
+## Feature switches
 The deletion of functions and namespaces can be switched by using the
 env variable `DISABLE_DELETE=true`<br>
 For example, to start a production server with deletion disabled
 ` DISABLE_DELETE=true NODE_ENV=production yarn run start `
+
 
 ## Changelog

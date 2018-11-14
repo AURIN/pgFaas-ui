@@ -19,7 +19,6 @@ RUN git clone https://github.com/AURIN/pgFaas-ui.git
 WORKDIR /home/app/pgFaas-ui
 RUN git checkout ${PGFAAS_GIT_TAG}
 RUN yarn install
-RUN yarn run build
 COPY *.* ./
 RUN chmod a+x *.sh
 RUN chmod a+w /var/log
