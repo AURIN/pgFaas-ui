@@ -18,7 +18,9 @@ Front-end interface for FaaS on PostGIS
 
 ## Install
 
-yarn install <br>
+```bash
+yarn install
+```
 
 
 ## Usage
@@ -32,7 +34,7 @@ Start the server:    ```yarn run start```
 ### Build production and run production server
 
 ```bash
-  yarn run build <br>
+  yarn run build 
   NODE_ENV=production yarn run start
 ```
 
@@ -53,8 +55,8 @@ which, for obvious reasons, is not push to the repository.
 ```
 
 ```bash
-  source ./configuration.sh; source ./secrets.sh
-  docker build --tag ${DOCKER_REGISTRY}/pgfaas-api:${PGFAAS_UI_VERSION}\
+  source ./configuration.sh
+  docker build --tag ${DOCKER_REGISTRY}/pgfaas-ui:${PGFAAS_UI_VERSION}\
     ./docker/pgfaas-ui
 ```
 
@@ -62,14 +64,14 @@ Push to registry:
 ```bash
   source ./configuration.sh; source ./secrets.sh
   docker login --username ${DOCKER_USERNAME} --password ${DOCKER_PASSWORD}
-  docker push ${DOCKER_REGISTRY}/pgfaas-api:${PGFAAS_API_VERSION}
+  docker push ${DOCKER_REGISTRY}/pgfaas-ui:${PGFAAS_UI_VERSION}
 ```
 
-Create and run a Docker container (it relies on the pgFaas service):
+Create and run a Docker container, by default the latest version. (It relies on the pgFaas service):
 ```bash
   docker create\
     --env NODE_ENV=production\
-    --env PGFAAS_API_URL='http://pgfaas.aurin.org.au'\
+    --env PGFAAS_API_URL='http://pgfaas.aurin.org.au/api'\
     --env BIND_ADDRESS='0.0.0.0'\
     --env EXPRESS_PORT=3020\
     --name pgfaas-ui\
