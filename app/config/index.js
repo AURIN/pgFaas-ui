@@ -1,4 +1,4 @@
 module.exports = {
-  DISABLE_DELETION: DISABLE_DELETION,
+  DISABLE_DELETE: DISABLE_DELETE,
   NODE_ENV: process.env.NODE_ENV
 };

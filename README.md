@@ -15,18 +15,17 @@ Front-end interface for FaaS on PostGIS
 * Node (8.11.3)
 * Yarn (1.9.4)
 
-
 ## Install
-
 ```bash
 yarn install
 ```
 
 ## Usage
-
 #### Run dev server
 
-Start the server:    ``` NODE_ENV=development yarn run start```
+```bash
+  NODE_ENV=development yarn run start
+```
 
 #### Run production server
 
@@ -38,6 +37,9 @@ Start the server:    ``` NODE_ENV=development yarn run start```
 
 The application can also be built to the dist folder if the user
 wants to server the files a different way.
+```bash
+  yarn run build-dev
+```
 
 ## Configuration
 
@@ -46,7 +48,7 @@ Server configuration file resides in ````config/config.js````
 ## Building and deployment of a Docker image (optional)
 
 Docker registry username and password can be set in the `secrets.sh` script,
-which, for obvious reasons, is not push to the repository.
+which, for obvious reasons, is not pushed to the repository.
 
 ```bash
   export DOCKER_USERNAME="<docker registry username>"
@@ -88,10 +90,8 @@ To deploy a sandbox version of the UI, `NODE_ENV` has to be set to `sandbox`.
 ## Feature switches
 
 The deletion of functions and namespaces can be switched by using the
-env variable `DISABLE_DELETION=true` For example to start a production
-server with deletion disabled
-
-` DISABLE_DELETION=true EXPRESS_PORT=8000 NODE_ENV=production yarn run start `
+env variable `DISABLE_DELETE=true`<br>
+For example, to start a production server with deletion disabled
+` DISABLE_DELETE=true NODE_ENV=production yarn run start `
 
 ## Changelog
-

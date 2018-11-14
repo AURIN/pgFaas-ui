@@ -10,7 +10,7 @@
     "expect": true,
     "sinon": true,
     "__DEV__": true,
-    "DISABLE_DELETION": true,
+    "DISABLE_DELETE": true,
   },
   "parserOptions": {
     "ecmaFeatures": {

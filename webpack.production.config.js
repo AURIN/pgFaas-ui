@@ -6,6 +6,7 @@ const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const StatsPlugin = require('stats-webpack-plugin');
 const UglifyJsPlugin = require('uglifyjs-webpack-plugin');
 const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
+const config = require('./config/config.js').getProperties();
 
 module.exports = {
     entry: [
@@ -74,7 +75,7 @@ module.exports = {
             'process.env.NODE_ENV': JSON.stringify('production')
         }),
         new webpack.DefinePlugin({
-          DISABLE_DELETION: JSON.stringify(process.env.DISABLE_DELETION)
+          DISABLE_DELETE: config.disable_delete || JSON.parse(false)
         })
     ],
     node: {

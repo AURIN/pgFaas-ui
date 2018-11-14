@@ -2,6 +2,7 @@
 const path = require('path');
 const webpack = require('webpack');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
+const config = require('./config/config.js').getProperties();
 
 module.exports = {
   devtool: 'eval-source-map',
@@ -35,7 +36,7 @@ module.exports = {
       'process.env.NODE_ENV': JSON.stringify('development')
     }),
     new webpack.DefinePlugin({
-      DISABLE_DELETION: JSON.stringify(process.env.DISABLE_DELETION) || JSON.parse(false)
+      DISABLE_DELETE: config.disable_delete || JSON.parse(false)
     })
   ],
   node: {

@@ -9,7 +9,7 @@ const pino = require('pino')();
 const webpack = require('webpack');
 
 const app = express();
-const webpackConfig = process.env.NODE_ENV === 'production' ? require('./webpack.production.config.js') : require('./webpack.config');
+const webpackConfig = ['production', 'sandbox'].includes(process.env.NODE_ENV) ? require('./webpack.production.config.js') : require('./webpack.config');
 const compiler = webpack(webpackConfig);
 
 let ctx = {

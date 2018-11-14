@@ -104,7 +104,7 @@ class CodePanel extends React.Component {
                 iconAfter="upload">
                 Update
               </Button>
-              { !APP_CONFIG.DISABLE_DELETION &&
+              { !APP_CONFIG.DISABLE_DELETE &&
                 <Button
                   marginRight={5}
                   height={32}
@@ -132,7 +132,7 @@ class CodePanel extends React.Component {
               <Text paddingLeft="30px"> Namespace: {`${nSpace}`} </Text>
             </div>,
             <div>
-              { !APP_CONFIG.DISABLE_DELETION &&
+              { !APP_CONFIG.DISABLE_DELETE &&
                 <Button
                   marginRight={5}
                   height={32}
