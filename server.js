@@ -1,5 +1,5 @@
 const bodyParser = require('body-parser');
-const config = require('config');
+const config = require('./config/config.js').getProperties();
 const exec = require('child-process-promise').exec;
 const express = require('express');
 const expressLogger = require('express-pino-logger')();
@@ -15,8 +15,8 @@ const compiler = webpack(webpackConfig);
 let ctx = {
   app: null,
   CFG: {
-    PORT: config.get('EXPRESS.PORT'),
-    BIND_ADDRESS: config.get('EXPRESS.BIND_ADDRESS')
+    PORT: config.express_port,
+    BIND_ADDRESS: config.bind_address
   }
 };
 
@@ -27,7 +27,6 @@ let ctx = {
  */
 function loadConfiguration (ctx) {
   return new Promise(function(resolve) {
-    pino.info('Configuration loaded from %s', config.util.getEnv('NODE_CONFIG_DIR'));
     resolve(ctx);
   });
 }

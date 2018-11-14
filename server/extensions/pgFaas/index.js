@@ -1,5 +1,5 @@
-const config = require('config');
-const BASE_URL = config.get('PGFAAS.URL_BASE')
+const config = require('../../../config/config.js');
+const BASE_URL = config.getProperties().pgfaas_api_url;
 
 module.exports = {
   NAMESPACES: () => BASE_URL + '/function/namespaces',
