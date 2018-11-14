@@ -2,9 +2,9 @@
 # Adapted from OpenFaas node8-express-template
 #
 
-FROM node:8.11.3-alpine
+FROM node:8.11.4-alpine
 
-ENV PGFAAS_GIT_TAG "develop"
+ENV PGFAAS_GIT_TAG "issue-2"
 
 RUN addgroup -S app && adduser -S -g app app
 RUN apk update
