@@ -1,7 +1,7 @@
 {
   "name": "pgFaas-ui",
-  "version": "v0.0.0",
-  "description": "",
+  "version": "v0.1.0",
+  "description": "pgFaas User Interface",
   "main": "index.js",
   "scripts": {
     "test": "jest",
@@ -10,13 +10,18 @@
     "build": "rimraf dist && NODE_ENV=production webpack --config ./webpack.production.config.js --progress --profile --colors --mode production",
     "eslint": "eslint ."
   },
-  "keywords": [
-    "Faas",
-    "Gis"
-  ],
-  "author": "Mihira",
-  "license": "MIT",
+  "author": "",
+  "license": "Apache-2.0",
+  "engines": {
+    "node": ">=8.11.0 <8.12.0",
+    "npm": ">=5.6.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/AURIN/pgFaas-ui"
+  },
   "dependencies": {
+    "convict": "^4.4.0",
     "@babel/cli": "^7.1.2",
     "@babel/core": "^7.1.2",
     "@babel/plugin-proposal-export-namespace-from": "^7.0.0",
@@ -49,7 +54,7 @@
     "jest-cli": "^23.6.0",
     "json-loader": "^0.5.4",
     "mini-css-extract-plugin": "^0.4.4",
-    "node-sass": "^3.7.0",
+    "node-sass": "^4.5.3",
     "pino": "^5.8.0",
     "postcss-loader": "^0.9.1",
     "prop-types": "^15.5.9",
@@ -80,5 +85,12 @@
     "webpack-bundle-analyzer": "^2.13.1",
     "webpack-dev-middleware": "^3.4.0",
     "webpack-dev-server": "^2.9.2"
+  },
+  "scripts": {
+    "test": "jest",
+    "start": "node server",
+    "build-dev": "rimraf dist && webpack --watch --config ./webpack.config.js --progress --colors --mode development",
+    "build": "rimraf dist && webpack --config ./webpack.production.config.js --progress --profile --colors --mode production",
+    "eslint": "eslint ."
   }
 }
