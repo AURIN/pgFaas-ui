@@ -4,7 +4,7 @@
 
 FROM node:8.11.4
 
-ENV PGFAAS_GIT_TAG "0.1.0"
+ENV PGFAAS_GIT_TAG "v0.1.0"
 
 RUN apt-get update
 RUN apt-get install -y git curl vim gcc cmake libpng-dev
@@ -18,6 +18,5 @@ RUN git checkout ${PGFAAS_GIT_TAG}
 RUN yarn install
 COPY *.* ./
 RUN chmod a+x *.sh
-RUN chmod a+w /var/log
 CMD ["./startup.sh"]
 
