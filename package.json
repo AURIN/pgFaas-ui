@@ -6,8 +6,8 @@
   "scripts": {
     "test": "jest",
     "start": "node server",
-    "build-dev": "rimraf dist && webpack --watch --config ./webpack.config.js --progress --colors --mode development",
-    "build": "rimraf dist && webpack --config ./webpack.production.config.js --progress --profile --colors --mode production",
+    "build-dev": "rimraf dist && NODE_ENV=development webpack --watch --config ./webpack.config.js --progress --colors ",
+    "build": "rimraf dist && NODE_ENV=production webpack --config ./webpack.production.config.js --progress --profile --colors --mode production",
     "eslint": "eslint ."
   },
   "keywords": [

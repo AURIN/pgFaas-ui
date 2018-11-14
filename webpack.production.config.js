@@ -72,10 +72,10 @@ module.exports = {
         // plugin for passing in data to the js, like what NODE_ENV we are in.
         new webpack.DefinePlugin({
             'process.env.NODE_ENV': JSON.stringify('production')
+        }),
+        new webpack.DefinePlugin({
+          DISABLE_DELETION: JSON.stringify(process.env.DISABLE_DELETION)
         })
-        // new BundleAnalyzerPlugin({
-        //         analyzerMode: 'static'
-        // })
     ],
     node: {
           fs: 'empty',

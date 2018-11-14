@@ -21,20 +21,24 @@ yarn install <br>
 
 ## Usage
 
-#### Run local server
+#### Run local dev server
 
-Watch the src files: ````yarn run build-dev```` <br>
-Start the server:    ````yarn run start````
+Start the server:    ```` yarn run start ````
 
-#### Build production and run production server
+#### Run production server
 
-yarn run build <br>
 NODE_ENV=production yarn run start
+
+#### Build dist
+
+The application can also be built to the dist folder if the user
+wants to server the files a different way.
 
 ### Configuration
 
 Server configuration file resides in ````config/default.js```` <br>
-Parameters that can be set :
+Parameters that can be set in the file. Alternatively set them <br>
+in the environment, for example :  `EXPRESS_PORT=3000`
 
 ##### ```` EXPRESS.PORT ````<br>
 
@@ -47,6 +51,14 @@ Ip address express binds to
 ##### ```` PGFAAS.URL_BASE ````
 
 Location of the API server
+
+### Feature switches
+
+The deletion of functions and namespaces can be switched by using the
+env variable `DISABLE_DELETION=true` For example to start a production
+server with deletion disabled
+
+` DISABLE_DELETION=true EXPRESS_PORT=8000 NODE_ENV=production yarn run start `
 
 ## Changelog
 

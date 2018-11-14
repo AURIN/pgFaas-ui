@@ -9,7 +9,7 @@ const pino = require('pino')();
 const webpack = require('webpack');
 
 const app = express();
-const webpackConfig = require('./webpack.config');
+const webpackConfig = process.env.NODE_ENV === 'production' ? require('./webpack.production.config.js') : require('./webpack.config');
 const compiler = webpack(webpackConfig);
 
 let ctx = {
@@ -30,7 +30,7 @@ function loadConfiguration (ctx) {
     pino.info('Configuration loaded from %s', config.util.getEnv('NODE_CONFIG_DIR'));
     resolve(ctx);
   });
-}
+};
 
 /**
  * Create express application.
@@ -45,7 +45,7 @@ function createApplication (ctx) {
   ctx.app.use(expressLogger);
   ctx.app.set('view engine', 'ejs');
   return ctx;
-}
+};
 
 /**
  * Create application shutdown handlers.
@@ -67,7 +67,7 @@ function createShutdownHandlers (ctx) {
   });
 
   return ctx;
-}
+};
 
 /**
  * Define application routes.
@@ -87,7 +87,7 @@ function defineRoutes (ctx) {
     });
     resolve(ctx);
   });
-}
+};
 
 function startApplication (ctx) {
   ctx.app.use(middleware(compiler, {

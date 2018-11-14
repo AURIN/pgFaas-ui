@@ -9,7 +9,8 @@
   "globals": {
     "expect": true,
     "sinon": true,
-    "__DEV__": true
+    "__DEV__": true,
+    "DISABLE_DELETION": true,
   },
   "parserOptions": {
     "ecmaFeatures": {

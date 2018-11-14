@@ -33,6 +33,9 @@ module.exports = {
     new webpack.NoEmitOnErrorsPlugin(),
     new webpack.DefinePlugin({
       'process.env.NODE_ENV': JSON.stringify('development')
+    }),
+    new webpack.DefinePlugin({
+      DISABLE_DELETION: JSON.stringify(process.env.DISABLE_DELETION) || JSON.parse(false)
     })
   ],
   node: {

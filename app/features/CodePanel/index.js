@@ -12,6 +12,7 @@ import {
   requestDeleteNamespace
 } from './actions/index.js';
 import { NODE_TYPES } from '../ParametersPanel/actions/types.js';
+import * as APP_CONFIG from '../../config/index.js';
 
 class CodePanel extends React.Component {
   constructor (props) {
@@ -103,15 +104,17 @@ class CodePanel extends React.Component {
                 iconAfter="upload">
                 Update
               </Button>
-              <Button
-                marginRight={5}
-                height={32}
-                appearance="minimal"
-                intent="warning"
-                onClick={this.onDeleteFunctionClick}
-                iconAfter="delete">
-                Delete
-              </Button>
+              { !APP_CONFIG.DISABLE_DELETION &&
+                <Button
+                  marginRight={5}
+                  height={32}
+                  appearance="minimal"
+                  intent="warning"
+                  onClick={this.onDeleteFunctionClick}
+                  iconAfter="delete">
+                  Delete
+                </Button>
+              }
               <Button
                 marginRight={5}
                 height={32}
@@ -129,15 +132,17 @@ class CodePanel extends React.Component {
               <Text paddingLeft="30px"> Namespace: {`${nSpace}`} </Text>
             </div>,
             <div>
-              <Button
-                marginRight={5}
-                height={32}
-                appearance="minimal"
-                intent="warning"
-                onClick={this.onDeleteNameSpaceClick}
-                iconAfter="delete">
-                Delete
-              </Button>
+              { !APP_CONFIG.DISABLE_DELETION &&
+                <Button
+                  marginRight={5}
+                  height={32}
+                  appearance="minimal"
+                  intent="warning"
+                  onClick={this.onDeleteNameSpaceClick}
+                  iconAfter="delete">
+                  Delete
+                </Button>
+              }
             </div>
           ]);
         case NODE_TYPES.NEW_FUNCTION:
