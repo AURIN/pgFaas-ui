@@ -1,6 +1,6 @@
 {
   "name": "pgFaas-ui",
-  "version": "v0.2.0-SNAPSHOT",
+  "version": "v0.1.1",
   "description": "pgFaas User Interface",
   "main": "index.js",
   "scripts": {
