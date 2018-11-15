@@ -95,15 +95,17 @@ class CodePanel extends React.Component {
               <Text paddingLeft="30px"> Function : {`${nSpace} / ${fName}`} </Text>
             </div>,
             <div>
-              <Button
-                marginRight={5}
-                height={32}
-                appearance="minimal"
-                intent="success"
-                onClick={this.onUpdateClick}
-                iconAfter="upload">
-                Update
-              </Button>
+              { !APP_CONFIG.PROTECTED_NAMESPACES.includes(nSpace) &&
+                <Button
+                  marginRight={5}
+                  height={32}
+                  appearance="minimal"
+                  intent="success"
+                  onClick={this.onUpdateClick}
+                  iconAfter="upload">
+                  Update
+                </Button>
+              }
               { !APP_CONFIG.DISABLE_DELETE &&
                 <Button
                   marginRight={5}

@@ -38,6 +38,13 @@ const config = convict({
     default: false,
     env: 'DISABLE_DELETE',
     arg: 'disable_delete'
+  },
+  protected_namespaces: {
+    doc: 'Prevent update of specified namespaces',
+    format: 'String',
+    default: "[]",
+    env: 'PROTECTED_NAMESPACES',
+    arg: 'protected_namespaces'
   }
 });
 

@@ -50,6 +50,7 @@ class TestInput extends React.Component {
         <Pane
           display="flex"
           height="95%"
+          width="100%"
           alignItems="center"
           flexDirection="column"
           justifyContent="center" >

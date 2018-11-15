@@ -76,6 +76,9 @@ module.exports = {
         }),
         new webpack.DefinePlugin({
           DISABLE_DELETE: config.disable_delete || JSON.parse(false)
+        }),
+        new webpack.DefinePlugin({
+          PROTECTED_NAMESPACES: JSON.stringify(config.protected_namespaces) || JSON.parse([])
         })
     ],
     node: {

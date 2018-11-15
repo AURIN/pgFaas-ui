@@ -82,10 +82,22 @@ To deploy a sandbox version of the UI, `NODE_ENV` has to be set to `sandbox`.
 
 
 ## Feature switches
-The deletion of functions and namespaces can be switched by using the
-env variable `DISABLE_DELETE=true`<br>
-For example, to start a production server with deletion disabled
-` DISABLE_DELETE=true NODE_ENV=production yarn run start `
 
+#### DISABLE_DELETE
+
+The deletion of functions and namespaces can be switched by using the env variable `DISABLE_DELETE=true`
+For example, to start a production server with deletion disabled:
+```bash
+  DISABLE_DELETE=true NODE_ENV=production yarn run start `
+```
+
+#### PROTECTED_NAMESPACE
+
+Specify which namespaces are marked as protected. Functions within these namespaces won't have an update
+option. For example:
+
+```bash
+  PROTECTED_NAMESPACE="[\"sample\"]" NODE_ENV=production yarn run start`
+```
 
 ## Changelog
