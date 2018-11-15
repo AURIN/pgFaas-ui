@@ -1,3 +1,4 @@
 {
-  "disable_delete": true
+  "disable_delete": true,
+  "protected_namespaces": "[\"sample\"]"
 }
