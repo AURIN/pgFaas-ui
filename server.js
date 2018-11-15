@@ -112,7 +112,7 @@ function startApplication (ctx) {
   ctx.app.listen(
     ctx.CFG.PORT,
     ctx.CFG.BIND_ADDRESS,
-    () => pino.info(`Listening at ${ctx.CFG.BIND_ADDRESS} on ${ctx.CFG.PORT}`)
+    () => pino.info(`pgFaas-ui with ENV: ${config.env}, listening at ${ctx.CFG.BIND_ADDRESS} on ${ctx.CFG.PORT}. Using API url ${config.pgfaas_api_url}.`)
   )
 };
 
