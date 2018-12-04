@@ -4,6 +4,7 @@ import { setPanelEmpty } from '../features/CodePanel/actions/index.js';
 import { deleteFunction as deleteFunctionCall } from '../lib/api/functions.js';
 import { parameterPanelInit } from '../features/ParametersPanel/actions/index.js';
 import { toaster } from 'evergreen-ui';
+import {apiMessageProcessing} from './apiMessageProcessing';
 
 const deleteFunction = function* _deleteFunction () {
   while (true) {
@@ -14,11 +15,11 @@ const deleteFunction = function* _deleteFunction () {
       req.fName);
 
     if (response) {
-      toaster.success('Function deleted', { duration: 2 });
+      toaster.success (apiMessageProcessing (response), {duration: 3});
       yield put(parameterPanelInit());
       yield put(setPanelEmpty());
     } else {
-      toaster.error('Function could not be deleted');
+      toaster.danger (apiMessageProcessing (error), {duration: 3});
       console.warn(error);
     }
   }

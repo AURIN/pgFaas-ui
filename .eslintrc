@@ -154,7 +154,7 @@
     }],
     "no-nested-ternary": 2,          // http://eslint.org/docs/rules/no-nested-ternary
     "no-new-object": 2,              // http://eslint.org/docs/rules/no-new-object
-    "no-spaced-func": 2,             // http://eslint.org/docs/rules/no-spaced-func
+    "no-spaced-func": 1,             // http://eslint.org/docs/rules/no-spaced-func
     "no-trailing-spaces": 2,         // http://eslint.org/docs/rules/no-trailing-spaces
     "no-extra-parens": [2, "functions"], // http://eslint.org/docs/rules/no-extra-parens
     "no-underscore-dangle": 0,       // http://eslint.org/docs/rules/no-underscore-dangle
@@ -166,7 +166,7 @@
       "after": true
     }],
     "space-before-blocks": 2,        // http://eslint.org/docs/rules/space-before-blocks
-    "space-before-function-paren": [2, "always"], // http://eslint.org/docs/rules/space-before-function-paren
+    "space-before-function-paren": [1, "always"], // http://eslint.org/docs/rules/space-before-function-paren
     "space-infix-ops": 2,            // http://eslint.org/docs/rules/space-infix-ops
     "spaced-comment": [2, "always",  {// http://eslint.org/docs/rules/spaced-comment
       "exceptions": ["-", "+"],

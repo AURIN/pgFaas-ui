@@ -4,6 +4,7 @@ import { toaster } from 'evergreen-ui';
 import { getTables,  getTable} from '../lib/api/tables.js';
 import * as _ from 'lodash';
 import {TABLE_NODE_TYPES} from '../features/ParametersPanel/actions/types.js';
+import {apiMessageProcessing} from './apiMessageProcessing';
 
 const buildTables = () => getTables()
   .then(tables => Promise.all(_.map(tables, getTable)))
@@ -35,7 +36,7 @@ const showTables = function* _showTables () {
     } else {
       console.warn(error);
       yield put({ type: types.SET_SELECTED_PARAMETER_DB, dbData: [] });
-      toaster.danger('Could not load tables');
+      toaster.danger(apiMessageProcessing(error), { duration: 3 });
     }
   }
 };

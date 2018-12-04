@@ -3,6 +3,7 @@ import * as types from '../features/CodePanel/actions/types.js';
 import { updateFunction as apiUpdateFunction } from '../lib/api/functions.js';
 import { setTestCodeError } from '../features/CodePanel/actions/index.js';
 import { toaster } from 'evergreen-ui';
+import {apiMessageProcessing} from './apiMessageProcessing';
 
 const updateFunction = function* _updateFunction () {
   while (true) {
@@ -32,10 +33,10 @@ const updateFunction = function* _updateFunction () {
       );
 
       if (response) {
-        toaster.success('Function updated', { duration: 2 });
+        toaster.success(apiMessageProcessing(response), { duration: 3 });
         yield put(setTestCodeError(''));
       } else {
-        toaster.warngerror('Function could not be updated');
+        toaster.danger(apiMessageProcessing(error), { duration: 3 });
         console.warn(error);
       }
     }

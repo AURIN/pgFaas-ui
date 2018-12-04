@@ -3,6 +3,7 @@ import * as types from '../features/CodePanel/actions/types.js';
 import { toaster } from 'evergreen-ui';
 import { getFunction } from '../lib/api/functions.js';
 import { setPanelEmpty } from '../features/CodePanel/actions/index.js';
+import {apiMessageProcessing} from './apiMessageProcessing';
 
 const showFunction = function* _showFunction () {
   while (true) {
@@ -18,8 +19,8 @@ const showFunction = function* _showFunction () {
         testInput: response.testInput
       });
     } else {
+      toaster.danger(apiMessageProcessing(error), { duration: 3 });
       console.warn(error);
-      toaster.danger('Could not get function');
       yield put(setPanelEmpty());
     }
   }

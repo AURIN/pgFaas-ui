@@ -4,6 +4,7 @@ import { setPanelEmpty } from '../features/CodePanel/actions/index.js';
 import { deleteNamespace as deleteNamespaceCall } from '../lib/api/nameSpaces.js';
 import { parameterPanelInit } from '../features/ParametersPanel/actions/index.js';
 import { toaster } from 'evergreen-ui';
+import {apiMessageProcessing} from './apiMessageProcessing';
 
 const deleteNamespace = function* _deleteNamespace () {
   while (true) {
@@ -11,11 +12,11 @@ const deleteNamespace = function* _deleteNamespace () {
     const {response, error} = yield call(deleteNamespaceCall, req.nSpace);
 
     if (response) {
-      toaster.success('Namespace deleted', { duration: 2 });
+      toaster.success(apiMessageProcessing(response), { duration: 3 });
       yield put(parameterPanelInit());
       yield put(setPanelEmpty());
     } else {
-      toaster.error('Namespace could not be deleted');
+      toaster.danger(apiMessageProcessing(error), { duration: 3 });
       console.warn(error);
     }
   }

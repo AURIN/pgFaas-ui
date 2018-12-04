@@ -7,6 +7,7 @@ import {
   setCreateNameSpaceStateInvalid,
   parameterPanelInit
 } from '../features/ParametersPanel/actions/index.js';
+import {apiMessageProcessing} from './apiMessageProcessing';
 
 const createNewNameSpace = function* _createNewNameSpace () {
   while (true) {
@@ -15,9 +16,9 @@ const createNewNameSpace = function* _createNewNameSpace () {
 
     const { response, error } = yield call(createNameSpace, action.newNameSpace);
     if (response) {
-      toaster.success('Namespace created', { duration: 2 });
+      toaster.success(apiMessageProcessing(response), { duration: 3 });
     } else {
-      toaster.danger('Namespace could not be saved');
+      toaster.danger(apiMessageProcessing(error), { duration: 3 });
       console.warn(error);
     }
 
