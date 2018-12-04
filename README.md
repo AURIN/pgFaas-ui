@@ -31,7 +31,7 @@ Front-end interface for pgFaas
 The application can also be built to the dist folder if the user
 wants to server the files a different way.
 ```bash
-  yarn run build-dev
+  yarn run build
 ```
 
 
@@ -48,15 +48,11 @@ which, for obvious reasons, is not pushed to the repository.
   export DOCKER_PASSWORD="<docker registry password>"
 ```
 
-```bash
-  source ./configuration.sh
-  docker build --tag ${DOCKER_REGISTRY}/pgfaas-ui:${PGFAAS_UI_VERSION}\
-    ./docker/pgfaas-ui
-```
-
-Push to registry:
+Build and push to registry.
 ```bash
   source ./configuration.sh; source ./secrets.sh
+  docker build --tag ${DOCKER_REGISTRY}/pgfaas-ui:${PGFAAS_UI_VERSION}\
+    ./docker/pgfaas-ui
   docker login --username ${DOCKER_USERNAME} --password ${DOCKER_PASSWORD}
   docker push ${DOCKER_REGISTRY}/pgfaas-ui:${PGFAAS_UI_VERSION}
 ```
