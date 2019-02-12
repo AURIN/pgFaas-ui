@@ -4,7 +4,7 @@
 
 FROM node:8.11.4
 
-ENV PGFAAS_GIT_TAG "v0.1.3"
+ENV PGFAAS_GIT_TAG "v0.1.4"
 
 RUN apt-get update
 RUN apt-get install -y git curl vim gcc cmake libpng-dev
