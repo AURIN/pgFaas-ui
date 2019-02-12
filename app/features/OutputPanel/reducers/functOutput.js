@@ -33,6 +33,23 @@ export default (state = initialData, action) => {
           consoleState: types.CONSOLE_STATE.NEUTRAL,
         }
       );
+    case types.ADD_ERROR_OUTPUT:
+      return _.merge(
+        {},
+        state,
+        {
+          consoleState: types.CONSOLE_STATE.NEUTRAL,
+          outputCounter: state.outputCounter + 1,
+          output: [
+            ...state.output,
+            {
+              output: action.output,
+              msgType: action.msgType,
+              counter: state.outputCounter + 1,
+            }
+          ]
+        }
+      );
     case types.ADD_OUTPUT:
       return _.merge(
         {},

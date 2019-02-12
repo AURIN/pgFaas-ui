@@ -4,8 +4,10 @@ import {createFunction as createFunctionCall} from '../lib/api/functions.js';
 import {parameterPanelInit} from '../features/ParametersPanel/actions/index.js';
 import {setTestCodeError} from '../features/CodePanel/actions/index.js';
 import {toaster} from 'evergreen-ui';
-import {addOutputFailure} from '../features/OutputPanel/actions/index.js';
 import {apiMessageProcessing} from './apiMessageProcessing.js';
+import {
+  showErrorToUser,
+} from '../features/OutputPanel/actions/index.js';
 
 const createFunction = function* _createFunction () {
   while (true) {
@@ -40,8 +42,8 @@ const createFunction = function* _createFunction () {
         yield put (setTestCodeError (''));
       } else {
         toaster.danger (apiMessageProcessing (error), {duration: 3});
-        addOutputFailure (error);
         console.warn (error);
+        yield put(showErrorToUser(error.message));
       }
     }
   }

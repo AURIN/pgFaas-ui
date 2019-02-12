@@ -28,7 +28,7 @@ const config = convict({
   pgfaas_api_url: {
     doc: 'The pgFaas API URL.',
     format: 'url',
-    default: 'http://pgfaas.aurin.org.au/api',
+    default: 'http://sandbox.pgfaas.aurin.org.au/api',
     env: 'PGFAAS_API_URL',
     arg: 'pgfaas_api_url'
   },
@@ -42,13 +42,13 @@ const config = convict({
   protected_namespaces: {
     doc: 'Prevent update of specified namespaces',
     format: 'String',
-    default: "[]",
+    default: '[]',
     env: 'PROTECTED_NAMESPACES',
     arg: 'protected_namespaces'
   }
 });
 
 config.loadFile('./config/' + config.get('env') + '.json');
-config.validate({allowed: 'strict'});
+config.validate({ allowed: 'strict' });
 
 module.exports = config;

@@ -10,14 +10,17 @@ const API = require('../../extensions/pgFaas/index.js');
  * @param {Response} res Response
  */
 function getTables (req, res) {
-  axios.get(API.DATABASES())
+  axios
+    .get(API.DATABASES())
     .then(function (response) {
       res.status(200).json(response.data);
     })
     .catch(function (error) {
-      res.status(500).json({msg: error.message});
-    })
-};
+      res
+        .status(error.response.status)
+        .json({ msg: error.response.data.message });
+    });
+}
 
 /**
  * Get columns in tables
@@ -25,16 +28,19 @@ function getTables (req, res) {
  * @param {Response} res Response
  */
 function getTable (req, res) {
-  axios.get(API.DATABASE(req.params.table))
+  axios
+    .get(API.DATABASE(req.params.table))
     .then(function (response) {
       res.status(200).json(response.data);
     })
     .catch(function (error) {
-      res.status(500).json({msg: error.message});
-    })
-};
+      res
+        .status(error.response.status)
+        .json({ msg: error.response.data.message });
+    });
+}
 
 module.exports = {
   getTables: getTables,
-  getTable: getTable,
-}
+  getTable: getTable
+};

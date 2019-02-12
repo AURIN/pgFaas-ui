@@ -27,6 +27,12 @@ const failureInvokeFunction = (nSpace, fName, output) => ({
   msgType: types.MESSAGE_TYPE.INVOKE_FAILURE_OUTPUT
 });
 
+const showErrorToUser = output => ({
+  type: types.ADD_ERROR_OUTPUT,
+  msgType: types.MESSAGE_TYPE.INVOKE_FAILURE_OUTPUT,
+  output
+});
+
 const addOutputFailure = output => ({
   type: types.ADD_OUTPUT,
   output,
@@ -45,6 +51,7 @@ export {
   addOutputFailure,
   requestInvokeFunction,
   requestInvokeFailed,
+  showErrorToUser,
   successInvokeFunction,
   failureInvokeFunction,
   setStateNeutral,

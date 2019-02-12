@@ -8,6 +8,9 @@ import {
   parameterPanelInit
 } from '../features/ParametersPanel/actions/index.js';
 import {apiMessageProcessing} from './apiMessageProcessing';
+import {
+  showErrorToUser,
+} from '../features/OutputPanel/actions/index.js';
 
 const createNewNameSpace = function* _createNewNameSpace () {
   while (true) {
@@ -19,7 +22,8 @@ const createNewNameSpace = function* _createNewNameSpace () {
       toaster.success(apiMessageProcessing(response), { duration: 3 });
     } else {
       toaster.danger(apiMessageProcessing(error), { duration: 3 });
-      console.warn(error);
+      yield put(showErrorToUser(error));
+      console.error(error);
     }
 
     yield put(setCreateNameSpaceStateInvalid());

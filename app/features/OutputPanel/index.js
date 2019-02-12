@@ -67,7 +67,7 @@ class OutputPanel extends React.Component {
           return(
             <Pane
               key={msg.counter}
-              width="10%"
+              width="100%"
               flex="0 0 auto"
               display="flex"
               alignItems="flex-start"
@@ -82,7 +82,7 @@ class OutputPanel extends React.Component {
           return(
             <Pane
               key={msg.counter}
-              width="10%"
+              width="100%"
               flex="0 0 auto"
               display="flex"
               alignItems="flex-start"

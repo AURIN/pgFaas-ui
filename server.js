@@ -92,11 +92,16 @@ function startApplication (ctx) {
   ctx.app.use(middleware(compiler, {
       publicPath: webpackConfig.output.publicPath,
       historyApiFallback: true,
+      watch: true,
       // It suppress error shown in console, so it has to be set to false.
       quiet: false,
       // It suppress everything except error, so it has to be set to false as well
       // to see success build.
       noInfo: false,
+      lazy: false,
+      watchOptions: {
+        poll: true
+      },
       stats: {
         // Config for minimal console.log mess.
         assets: false,

@@ -4,6 +4,9 @@ import { updateFunction as apiUpdateFunction } from '../lib/api/functions.js';
 import { setTestCodeError } from '../features/CodePanel/actions/index.js';
 import { toaster } from 'evergreen-ui';
 import {apiMessageProcessing} from './apiMessageProcessing';
+import {
+  showErrorToUser,
+} from '../features/OutputPanel/actions/index.js';
 
 const updateFunction = function* _updateFunction () {
   while (true) {
@@ -37,6 +40,9 @@ const updateFunction = function* _updateFunction () {
         yield put(setTestCodeError(''));
       } else {
         toaster.danger(apiMessageProcessing(error), { duration: 3 });
+        if (typeof error === 'string') {
+          yield put(showErrorToUser(error));
+        }
         console.warn(error);
       }
     }
