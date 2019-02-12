@@ -28,7 +28,7 @@ const config = convict({
   pgfaas_api_url: {
     doc: 'The pgFaas API URL.',
     format: 'url',
-    default: 'http://sandbox.pgfaas.aurin.org.au/api',
+    default: 'http://pgfaas.aurin.org.au/api',
     env: 'PGFAAS_API_URL',
     arg: 'pgfaas_api_url'
   },
